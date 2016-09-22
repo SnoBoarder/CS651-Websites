@@ -5,7 +5,7 @@ body {
     background: #000000;
 }
 
-.content, .top, .bottom {
+.content, .bottom {
     background: #000000;
     position: absolute;
     margin-left: 50%;
@@ -31,7 +31,7 @@ body {
     left: 30px;
 }
 
-.top {
+/*.top {
     background: url("images/top.gif");
     background-repeat: no-repeat;
     background-position: bottom left;
@@ -43,7 +43,7 @@ body {
     color: #00486C;
     padding-left: 120px;
     font-weight: bolder;
-}
+}*/
 
 .bottom {
     background: url("images/bottom.png");

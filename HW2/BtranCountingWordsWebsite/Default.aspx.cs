@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -16,6 +17,15 @@ public partial class _Default : System.Web.UI.Page
 	{
 		_scratchStringBuilder = new StringBuilder();
 		_scratchHashtable = new Hashtable();
+
+		// TODO: Ask about this
+		//ClientScript.GetPostBackEventReference(this, string.Empty);
+	}
+
+	protected void Submit(object sender, EventArgs e)
+	{
+		CountWords(_scratchHashtable, InputField.Text);
+		OutputField.Text = GenerateOutput(_scratchHashtable);
 	}
 
 	private static void CountWords(Hashtable hashTable, string words)
@@ -60,11 +70,5 @@ public partial class _Default : System.Web.UI.Page
 		}
 
 		return _scratchStringBuilder.ToString();
-	}
-
-	protected void Submit(object sender, EventArgs e)
-	{
-		CountWords(_scratchHashtable, InputField.Text);
-		OutputField.Text = GenerateOutput(_scratchHashtable);
 	}
 }
