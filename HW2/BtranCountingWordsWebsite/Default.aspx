@@ -11,17 +11,23 @@
 <body>
     <form id="form1" runat="server">
         <div class="image"></div>
-        <div class="top"><br />Brian's Website</div>
-        <div class="bottom"><br />&copy; Brian Tran, 2016</div>
+        <div class="top">
+            <br />
+            Brian's Website
+        </div>
+        <div class="bottom">
+            <br />
+            &copy; Brian Tran, 2016
+        </div>
         <div class="content">
             <div class="contentb">
                 <h2>Counting Words</h2>
-                <asp:TextBox ID="InputField" CssClass="input" runat ="server" OnTextChanged="OnTextChanged">Type your story here.</asp:TextBox>
+                <asp:TextBox ID="InputField" CssClass="input" TextMode="MultiLine" Wrap="true" runat="server">Tell your story here.</asp:TextBox>
                 <br />
-                <div class="submit">
-                    <asp:Button ID="Submit" runat="server" Text="Button" />
-                </div>
-                <br /><asp:TextBox ID="OutputField" CssClass="output" runat="server">Type your story here.</asp:TextBox>
+                <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Submit" />
+
+                <br />
+                <asp:TextBox ID="OutputField" CssClass="output" TextMode="MultiLine" Wrap="true" ReadOnly="true" runat="server">See your word counts here.</asp:TextBox>
 
             </div>
         </div>

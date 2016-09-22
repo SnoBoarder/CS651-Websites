@@ -65,21 +65,16 @@ body {
 
 .input {
     width: 480px;
-    height: 150px;
+    height: 160px;
     color: white;
     background-color: #00486C;
+    resize: none;
 }
 
 .output {
     width: 480px;
     height: 80px;
-}
-
-.submit {
-    position: absolute;
-    right: 0px;
-    width: 130px;
-    height: 100px;
+    resize: none;
 }
 
 #navigation {
