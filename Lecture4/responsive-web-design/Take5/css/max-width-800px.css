@@ -1,0 +1,40 @@
+@media screen and (max-width: 800px) {
+  /* Extra width left on the screen from the shifting of the sidebar div 
+    will cause the container div to expand along with its children div's 
+    undesirably. You have solved this type of problem before: Set a new 
+    optimal value for the max-width property of the container div and the 
+    problem will go away. Here we've picked 490px which is the width of 
+    the content div when the screen is at 800px wide */
+  #container {
+	  max-width: 490px;
+  }
+
+  /* Assign content div the full width of its parent container div,
+    which is 100% including the 2% for the left and right paddings 
+    as specified by CSS box-sizing declared in main.css */
+  #content {
+	  width: 100%;
+  }
+
+  /* Shift the sidebar div (containing the login and recent div's) 
+    below the content div by given it the full width (100%) of its 
+    parent div, i.e. the container div, with zero margin 
+    These 3 rules in main.css are overriden:
+    #sidebar {
+      margin-left: 1%;  
+      margin-bottom: 1%;
+      width: 35%;       
+    */
+  #sidebar {
+	  width: 100%;
+	  margin: 0;
+  }
+    
+  nav select {
+	display: inline-block;
+  }
+
+  nav a {
+	display: none;
+  }
+}

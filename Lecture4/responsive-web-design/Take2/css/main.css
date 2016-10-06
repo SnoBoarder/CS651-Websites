@@ -1,0 +1,13 @@
+/* main CSS */
+div, nav{
+border: solid 1px;
+}
+
+div:not(#container), nav{
+	margin: 5px;
+}
+
+	
+	
+
+
