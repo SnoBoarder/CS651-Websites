@@ -106,7 +106,7 @@
             </tr>
             <tr valign="top">
                 <td colspan="2">
-                    <input type="button" value="Get Products by prefix" onclick="getProducts('<%=txtPrefix.ClientID %>');" /><br />
+                    <input type="button" value="Get Products by prefix" onclick='getProducts("<%=txtPrefix.ClientID %>");' /><br />
                     <input type="button" value="Get All Products" onclick="getProducts();" />
                 </td>
                 <td>
