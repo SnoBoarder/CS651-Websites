@@ -1,0 +1,14 @@
+@media screen and (max-width: 800px) {
+    #container {
+        max-width: 490px;
+    }
+
+    #content {
+        width: 100%;
+    }
+
+    #contentb {
+        width: 100%;
+        margin: 0;
+    }
+}
