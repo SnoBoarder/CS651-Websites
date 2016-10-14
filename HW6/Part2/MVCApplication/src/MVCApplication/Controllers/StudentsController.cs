@@ -8,10 +8,22 @@ namespace MVCApplication.Controllers
 {
     public class StudentsController : Controller
     {
+        /// <summary>
+        /// The Home View should come up as a default for the entire Web
+        /// site(if you browse to http://localhost:50833/Students ), or if you
+        /// browse specifically to the Home Controller:
+        /// http://localhost:50833/Students/Home
+        /// </summary>
+        /// <returns></returns>
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Home()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult GoodStudents(string name, int numTimes = 1)
