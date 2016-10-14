@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "GoodStudents";
+}
+
+<h2>I have @ViewData["Number"] good students :-)</h2>
+
+@*<ul>
+        @for (int i = 0; i < (int)ViewData["NumTimes"]; i++)
+        {
+            <li>@ViewData["Message"]</li>
+        }
+
+        @foreach (Model.clsStudent student in (Model.clsStudents) ViewData["Message"])
+        {
+            <li>@student.FirstName</li>
+        }
+</ul>*@
+
+    <table style="width:100%">
+        <tr>
+            <th>Firstname</th>
+            <th>Address</th>
+            <th>Grade</th>
+        </tr>
+        @foreach (Model.clsStudent student in (Model.clsStudents)ViewData["Message"])
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.Address</td>
+                <td>@student.Grade</td>
+            </tr>
+        }
+    </table>

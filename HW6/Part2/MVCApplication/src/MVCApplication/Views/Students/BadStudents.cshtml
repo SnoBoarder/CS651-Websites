@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "BadStudents";
+}
+
+<h2>
+    I have @ViewData["Number"] bad students :-(
+</h2>
+
+<table style="width:100%">
+    <tr>
+        <th>Firstname</th>
+        <th>Address</th>
+    </tr>
+    @foreach (Model.clsStudent student in (Model.clsStudents)ViewData["Message"])
+    {
+        <tr>
+            <td>@student.FirstName</td>
+            <td>@student.Address</td>
+        </tr>
+    }
+</table>
