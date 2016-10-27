@@ -17,9 +17,11 @@ namespace MiddlewareCountingWordsWebsite
 
     public class Program
     {
+        public const string ADDRESS = "http://localhost:8080";
+
         static void Main(string[] args)
         {
-            WebApp.Start<Startup>("http://localhost:8080");
+            WebApp.Start<Startup>(ADDRESS);
             Console.WriteLine("Server Started; Press enter to Quit");
             Console.ReadLine();
         }
@@ -96,8 +98,24 @@ namespace MiddlewareCountingWordsWebsite
                 IOwinContext context = new OwinContext(environment);
 
                 string sourceString = context.Request.QueryString.Value;
-                int index = context.Request.QueryString.Value.IndexOf(REMOVE_AUTHENTICATION);
-                string cleanContent = (index < 0) ? sourceString : sourceString.Remove(index, REMOVE_AUTHENTICATION.Length);
+                string cleanContent = string.Empty;
+                int index = sourceString.IndexOf(REMOVE_AUTHENTICATION);
+                if (index < 0)
+                {
+                    index = sourceString.IndexOf(AUTHENTICATION_CODE);
+                    if (index < 0)
+                    {
+                        cleanContent = sourceString;
+                    }
+                    else
+                    {
+                        cleanContent = sourceString.Remove(index, AUTHENTICATION_CODE.Length);
+                    }
+                }
+                else
+                {
+                    cleanContent = sourceString.Remove(index, REMOVE_AUTHENTICATION.Length);
+                }
 
                 cleanContent = Uri.UnescapeDataString(cleanContent);
 
@@ -105,12 +123,177 @@ namespace MiddlewareCountingWordsWebsite
 
                 // Do something with the incoming result:
                 var response = environment["owin.ResponseBody"] as Stream;
+
                 using (var writer = new StreamWriter(response))
                 {
-                    // TODO: load css and html into writesync lol
-                    await writer.WriteAsync("<h1>Hello Dino!</h1>");
-                    await writer.WriteAsync("<p>" + cleanContent + "</p>");
-                    await writer.WriteAsync("<p>" + wordCount + "</p>");
+                    // loading the entire HTML piecemeal to integrate key parts (url, input, and output)
+                    string html1 = @"
+                        <!DOCTYPE html>
+                        <!-- Developed by Brian Tran [btran89@bu.edu] -->
+                        <html>
+	                        <head>
+		                        <title></title>
+		                        <style>
+			                        #container {
+				                        width: 100%;
+				                        font-family: Arial, Helvetica, sans-serif;
+				                        color: #FFF;
+				                        margin: auto;
+			                        }
+
+			                        #header {
+				                        background-color: #D9853B;
+				                        width: 100%;
+				                        height: 100px;
+				                        color: #FFF;
+				                        display: inline-block;
+				                        padding-left: 1%;
+				                        box-sizing: border-box;
+			                        }
+
+			                        #content {
+				                        background-color: #558C89;
+				                        padding-left: 1%;
+				                        padding-right: 1%;
+				                        padding-bottom: 1%;
+				                        margin-bottom: 1%;
+				                        width: 50%;
+				                        height: 600px;
+				                        float: left;
+				                        box-sizing: border-box;
+			                        }
+
+			                        #contentb {
+				                        background-color: #74AFAD;
+				                        padding-left: 1%;
+				                        padding-right: 1%;
+				                        padding-bottom: 1%;
+				                        margin-bottom: 1%;
+				                        width: 50%;
+				                        height: 600px;
+				                        float: left;
+				                        box-sizing: border-box;
+			                        }
+
+			                        #footer {
+				                        clear: left;
+				                        background-color: #D9853B;
+				                        width: 100%;
+				                        padding-left: 1%;
+				                        padding-top: 1%;
+				                        padding-bottom: 1%;
+				                        display: block;
+				                        box-sizing: border-box;
+			                        }
+
+			                        .input {
+				                        width: 98%;
+				                        height: 500px;
+				                        color: white;
+				                        background-color: inherit;
+				                        resize: none;
+				                        padding-left: 1%;
+				                        padding-right: 1%;
+				                        padding-bottom: 1%;
+			                        }
+
+			                        .output {
+				                        width: 98%;
+				                        height: 500px;
+				                        color: white;
+				                        background-color: inherit;
+				                        resize: none;
+				                        padding-left: 1%;
+				                        padding-right: 1%;
+				                        padding-bottom: 1%;
+			                        }
+
+			                        @media screen and (max-width: 490px) {
+				                        #container {
+					                        width: 100%;
+				                        }
+
+				                        h1 {
+					                        font-size: 1.2em;
+				                        }
+
+				                        h2 {
+					                        font-size: 1em;
+				                        }
+			                        }
+
+			                        @media screen and (max-width: 800px) {
+				                        #container {
+					                        max-width: 490px;
+				                        }
+
+				                        #content {
+					                        width: 100%;
+				                        }
+
+				                        #contentb {
+					                        width: 100%;
+					                        margin: 0;
+				                        }
+			                        }
+		                        </style>
+		                        <script type='text/javascript'>
+			                        function moveCaretToEnd(el) {
+			                            if (typeof el.selectionStart == 'number') {
+			                                el.selectionStart = el.selectionEnd = el.value.length;
+			                            } else if (typeof el.createTextRange != 'undefined') {
+			                                el.focus();
+			                                var range = el.createTextRange();
+			                                range.collapse(false);
+			                                range.select();
+			                            }
+			                        }
+
+			                        function refreshWordCount(el) {
+                                        if (el.value[el.value.length - 1] != ' ')
+				                        window.location.assign(";
+
+                    string address = "\"" + Program.ADDRESS + "/?" + REMOVE_AUTHENTICATION + "\" + el.value";
+
+                    string html2 = @" );
+			                        }
+		                        </script>
+		                        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+	                        </head>
+	                        <body>
+		                        <form id='form1' runat='server'>
+			                        <div id='container'>
+				                        <div id='header'>
+					                        <h1>Brian Tran's Word Counting</h1>
+				                        </div>
+
+				                        <div id='content'>
+					                        <h1>Input</h1>
+					                        <textarea id='input' rows='20' cols='48' autofocus='true' onfocus='moveCaretToEnd(this);' onkeyup='refreshWordCount(this)'>";
+
+                    string html3 = @"</textarea>
+				                        </div>
+
+				                        <div id='contentb'>
+					                        <h1>Output</h1>
+					                        <textarea id='output' rows='20' cols='50' readonly='true'>";
+
+                    string html4 =@"</textarea>
+				                        </div>
+
+				                        <div id='footer'>
+					                        <p>Copyright Brian Tran</p>
+				                        </div>
+			                        </div>
+		                        </form>
+	                        </body>
+                        </html>";
+
+                    // concatenate all the parts of the html
+                    string concatenatedHTML = html1 + address + html2 + cleanContent + html3 + wordCount + html4;
+
+                    await writer.WriteAsync(concatenatedHTML);
                 }
 
                 // Call the next Middleware in the chain:
