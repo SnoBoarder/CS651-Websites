@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<people>
+	<person age="42">
+		<FirstName>Dino</FirstName>
+		<LastName>Konstantopoulos</LastName>
+	</person>
+	<person age="62">
+		<FirstName>Dill</FirstName>
+		<LastName>Gates</LastName>
+	</person>
+	<person age="32">
+		<FirstName>Roger</FirstName>
+		<LastName>Federer</LastName>
+	</person>
+</people>
