@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CS651 Class Roster</title>
+    <link href="template.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <h1>CS651 Class Roster</h1>
+        <div id="peopleIKnow" class="sys-template">
+            <fieldset>
+                <legend>{{ FirstName }} {{ LastName }}</legend>
+                <!--* if (Photo) { *-->
+                <img sys:src="{{ 'Images/' + Photo }}" alt="{{ FirstName + ' ' + LastName }}" />
+                <!--* } *-->
+            </fieldset>
+        </div>
+    </div>
+    <script type="text/javascript" src="Script/MicrosoftAjax.debug.js"></script>
+    <script type="text/javascript" src="Script/MicrosoftAjaxTemplates.debug.js"></script>
+    <script type="text/javascript" src="PeopleIKnow.asmx/js"></script>
+    <script type="text/javascript">
+        Sys.Application.add_init(function() {
+            var peopleIKnowView = $create(Sys.Preview.UI.DataView, {}, {}, {}, $get("peopleIKnow"));
+            PeopleIKnow.GetPeople(function(results) {
+                peopleIKnowView.set_data(results);
+            });
+        });
+        Sys.Application.initialize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+//Ajax db access
+// 1. SqlDataSource
+// 2. Configure
+// 3. ScriptManager
+// 4. UpdatePanel
+// SELECT AddressLine1, PostalCode FROM Address WHERE PostalCode = @PostalCode
+// 90210
