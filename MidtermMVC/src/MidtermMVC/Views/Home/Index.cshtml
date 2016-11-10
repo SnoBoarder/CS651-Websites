@@ -8,27 +8,45 @@
 }
 
 <div class="row">
-    <h2>Input</h2>
+    <h1>Brian Tran's Secret Message Translator</h1>
+</div>
+
+<div class="row">
+    <h2>Input:</h2>
+    <p>Provide a secret message that needs to be translated.</p>
+    <button id="example">Generate Example Input</button>
+    <br />
+    <br />
     <textarea name="input" rows="2" cols="50" id="input" class="input"></textarea>
 </div>
 
 <div class="row">
     <div class="col-sm-8">
-        <h2>Current Strategy</h2>
+        <h2>Current Strategy:</h2>
+        <p>The strategy defines the relationship of what a letter should be replaced with. Press the Green "+" button to add a relationship. Otherwise use a Heurustics strategy.</p>
+        <button id="clear">Clear Current Strategy</button>
         <div id="jsGrid"></div>
-        <button id="submit">Submit</button>
     </div>
     <div class="col-sm-4">
-        <h2>Substitution Strategies</h2>
+        <h2>Heuristics</h2>
+        <p>Evaluate the provided input with the following substitution strategies:</p>
         <button id="letter">Letter Frequency Strategy</button>
-        <button id="bigram">Bigram</button>
-        <button id="trigram">Trigram</button>
+        <br />
+        <br />
+        <button id="bigram">Bigram Strategy</button>
+        <br />
+        <br />
+        <button id="trigram">Trigram Strategy</button>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-12">
-        <h2>Output</h2>
-        <div id="output"></div>
+        <br />
+        <button id="submit">Decipher with Current Strategy</button>
+        <h2>Translated Output:</h2>
+        <div class="wordwrap" id="output">Please provide an input to see a translation.</div>
+        <br />
+        <p><b>NOTE: Letters highlighted <span style="color:red">RED</span> in the output have not been translated.</b></p>
     </div>
 </div>

@@ -1,11 +1,21 @@
-﻿var gridData;
+﻿// member variable
+var gridData;
 
+// initialize
+init();
+
+// handle all functionality that needs to be initialized here
+function init() {
+	// generate the first instance of the grid
+	generateGrid([]);
+}
+
+// constantly keep grid data updated whenever the strategy updates
 var onGridUpdate = function (args) {
-	//alert(args.grid.data[0].InputLetter + "|" + args.grid.data[0].SubstituteLetter);
 	gridData = args.grid.data;
-	console.log("updating grid");
 };
 
+// generates the grid with the provided strategy
 function generateGrid(strategy) {
 	$("#jsGrid").jsGrid({
 		width: "100%",
@@ -58,21 +68,30 @@ function generateGrid(strategy) {
 	});
 }
 
-generateGrid();
+$("#example").click(function () {
+	$("#input").val("lbyeavb ha hpb lagyc at eacb sgbxzqwr. hpb zbm, xi mak vxm pxjb wahqebc, qi ha ihxgh lqhp hpb iqvdyb gkybi xsakh ybhhbg tgbfkbwem, xwc hgm wbl xddgaxepbi awym lpbw hpbib txqy. qw ahpbg lagci, mak dyxm hpb acci ha ihxgh, xwc hpbw xcukih makg ihgxhbrm xi wbbcbc.");
+});
 
+// handle clear click
+$("#clear").click(function () {
+	// clear the current strategy
+	generateGrid([]);
+});
+
+// handle submit click
 $("#submit").click(function () {
-	// TODO: setup the ajax call to decipher based on the strategy
+	// prepare data
 	var data = {
 		input: $("#input").val(),
 		config: gridData
 	};
 
+	// JSONify it
 	var dataString = JSON.stringify(data);
 
 	$.ajax({
 		type: "POST",
-		url: '/Home/Decipher',
-		//contentType: "application/json; charset=utf-8",
+		url: '/Translator/Decipher',
 		dataType: "text",
 		data: data,
 		success: function (data) {
@@ -81,6 +100,7 @@ $("#submit").click(function () {
 
 			var outputArray = output.split("");
 
+			// highlight the letters that have not been translated yet!
 			for (var i = 0; i < input.length; ++i) {
 				if (input.charAt(i) == outputArray[i] && isLetterOrNumber(input.charAt(i))) {
 					var letter = outputArray[i];
@@ -88,8 +108,13 @@ $("#submit").click(function () {
 					outputArray[i] = "<span style=\"color: red\">" + letter + "</span>";
 				}
 			}
-
-			var display = "<p>" + outputArray.join("") + "</p>";
+			
+			var display;
+			if (outputArray.length == 0) {
+				display = "Please provide an input to see a translation.";
+			} else {
+				display = "<p>" + outputArray.join("") + "</p>";
+			}
 
 			$("#output").html(display);
 		},
@@ -99,17 +124,59 @@ $("#submit").click(function () {
 	});
 });
 
+// returns whether or not the passed in character is a letter or number
 function isLetterOrNumber(char) {
 	return char.match(/[a-z0-9]/i);
 }
 
+// click handler for handling letter frequency based on the input
 $("#letter").click(function () {
-	var inputString = $("#input").val();
+	$.ajax({
+		type: "GET",
+		url: '/Frequency/Letter',
+		dataType: "text",
+		success: function (data) {
+			handleLetterFrequency(JSON.parse(data));
+		},
+		error: function (msg) {
+			alert("Error: " + msg.responseText);
+		}
+	});
+});
 
-	// TODO: Store this on server side
-	// organize first attempt of cipher based on letter frequency from the following URL:
-	// https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language
-	var frequency = ["e", "t", "a", "o", "i", "n", "s", "h", "r", "d", "l", "c", "u", "m", "w", "f", "g", "y", "p", "b", "v", "k", "j", "x", "q", "z"];
+// click handler for handling bigram frequency based on the input
+$("#bigram").click(function () {
+	$.ajax({
+		type: "GET",
+		url: '/Frequency/Bigram',
+		dataType: "text",
+		success: function (data) {
+			handleBigramFrequency(JSON.parse(data));
+		},
+		error: function (msg) {
+			alert("Error: " + msg.responseText);
+		}
+	});
+});
+
+// click handler for handling trigram frequency based on the input
+$("#trigram").click(function () {
+	$.ajax({
+		type: "GET",
+		url: '/Frequency/Trigram',
+		dataType: "text",
+		success: function (data) {
+			handleBigramFrequency(JSON.parse(data));
+		},
+		error: function (msg) {
+			alert("Error: " + msg.responseText);
+		}
+	});
+});
+
+// populate grid based on frequency
+function handleLetterFrequency(frequency) {
+	var inputString = $("#input").val();
 
 	// get number count for every letter
 	var dictionary = {};
@@ -145,15 +212,11 @@ $("#letter").click(function () {
 	}
 
 	generateGrid(strategy);
-});
+}
 
-$("#bigram").click(function () {
+// populate grid based on frequency
+function handleBigramFrequency(frequency) {
 	var inputString = $("#input").val();
-
-	// TODO: Store this on server side
-	// organize first attempt of cipher based on bigram frequency from the following URL:
-	// https://en.wikipedia.org/wiki/Bigram
-	var frequency = ["th", "he", "in", "er", "an", "re", "nd", "at", "on", "nt", "ha", "es", "st", "en", "ed", "to", "it", "ou", "ea", "hi", "is", "or", "ti", "as", "te", "et", "ng", "of", "al", "de", "se", "le", "sa", "si", "ar", "ve", "ra", "ld", "ur"];
 
 	var dictionary = makeNGrams(inputString, 2);
 
@@ -170,15 +233,11 @@ $("#bigram").click(function () {
 	var strategy = generateStrategy(items, frequency);
 
 	generateGrid(strategy);
-});
+}
 
-$("#trigram").click(function () {
+// populate grid based on frequency
+function handleTrigramFrequency(frequency) {
 	var inputString = $("#input").val();
-
-	// TODO: Store this on server side
-	// organize first attempt of cipher based on bigram frequency from the following URL:
-	// https://en.wikipedia.org/wiki/Trigram
-	var frequency = ["the", "and", "tha", "ent", "ing", "ion", "tio", "for", "nde", "has", "nce", "edt", "tis", "oft", "sth", "men"];
 
 	var dictionary = makeNGrams(inputString, 3);
 
@@ -195,19 +254,17 @@ $("#trigram").click(function () {
 	var strategy = generateStrategy(items, frequency);
 
 	generateGrid(strategy);
-});
+}
 
 function makeNGrams(text, size) {
 	var dictionary = {};
 
 	var word = "";
 
-	// add the first character if it's valid
-	// this allows for bypassing for loop check for i==0 for before and after values
-	// NOTE: This only handles letters!
+	// traverse every character in the provided text
 	for (var i = 0; i < text.length; ++i) {
 		if (isLetterOrNumber(text.charAt(i))) {
-			// it's a letter! handle it
+			// it's a letter! add it to the word
 			word += text.charAt(i);
 
 			if (word.length == size) {

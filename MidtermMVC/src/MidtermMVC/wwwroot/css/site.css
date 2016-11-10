@@ -42,3 +42,8 @@ textarea {
     height: 200px;
     resize: none;
 }
+
+/* Source: http://snipplr.com/view/10979/css-cross-browser-word-wrap */
+.wordwrap { 
+   word-wrap: break-word;
+}
