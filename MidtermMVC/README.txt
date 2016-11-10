@@ -14,6 +14,9 @@ Directions:
 - Your preferred browser should open a new tab directing you to the project's URL.
 - Enjoy!
 
+Notes:
+- Client side logic is in Main.js.
+
 Please let me know if you have any questions.
 
 Here are sample inputs:
