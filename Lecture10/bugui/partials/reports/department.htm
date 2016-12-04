@@ -1,0 +1,60 @@
+<div>
+	<div class="copy">
+		<h3>
+			Reports for the Department</h3>
+		<p>
+			This is where you fill in your department reports and where your committee activity is archived.</p>
+
+	<br />
+	<br />
+	<h4>
+		Key Performance Indicator and Committee Hours</h4>
+	</div>
+
+    <wj-radial-gauge 
+        class="radialgauge"
+        value="ctx.gauge.value" 
+        min="{{ctx.gauge.min}}" 
+        max="{{ctx.gauge.max}}">
+    </wj-radial-gauge>
+
+    <!-- flight hours -->
+	<div class="table-responsive">
+		<table class="table table-condensed">
+			<thead>
+                <tr>
+                    <th></th>
+                    <th class="col-sm-2">Committee Hours</th>
+                    <th class="col-sm-3">12 Months</th>
+                    <th class="col-sm-1 text-right">Current</th>
+                    <th class="col-sm-6">
+                        Current <span style="background-color:#0085c7">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        &nbsp;&nbsp;
+                        Target <span style="background-color:black">&nbsp;</span>
+                    </th>
+                </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in ctx.committeeHours">
+					<td class="text-center text-danger">
+						<span class="wj-glyph-circle" ng-show="{{item.current < item.target * .8}}"></span>
+					</td>
+					<td style="white-space:pre">{{item.name}}</td>
+					<td style="color:#0085c7" ng-bind-html="getSparklines(item.last12)"></td>
+					<td class="text-right">{{item.current}}{{item.units}}</td>
+					<td>
+						<span wj-tooltip="{{getTooltip(item)}}">
+							<wj-bullet-graph 
+								value="item.current"
+								min="0" max="12"
+								target="{{item.target}}"
+								bad="{{item.target * .75}}"
+								good="{{item.target * 1.15}}">
+							</wj-bullet-graph>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

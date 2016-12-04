@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-init="activeTheme='~/'">
+<head>
+    <meta charset="utf-8" />
+    <title>BU MET CS Dino Konstantopoulos</title>
+
+    <!-- ensure IE uses the latest version of IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- jQuery/Angular/Bootstrap -->
+    <!--<script src="http://code.jquery.com/jquery-2.0.0.min.js" type="text/javascript"></script>-->
+    <script src="scripts/bigvendor/jquery-2.1.3.js" type="text/javascript"></script>
+
+    <!--new new new-->
+    <!--<script src="scripts/bigvendor/bootstrap-2.3.2.min.js" type="text/javascript"></script>-->
+    <script src="scripts/jquery.simplemodal-1.4.4.js" type="text/javascript"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js" type="text/javascript"></script>-->
+    <script src="scripts/bigvendor/angular-1.3.13.js" type="text/javascript"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.min.js" type="text/javascript"></script>-->
+    <script src="scripts/bigvendor/angular-route.js" type="text/javascript"></script>
+
+    <!--<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>-->
+    <script src="scripts/bigvendor/bootstrap.js" type="text/javascript"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+    <link href="styles/bigvendor/bootstrap.css" rel="stylesheet" />
+    <!--<link href="styles/bigvendor/bootstrap-combined.min.css" rel="stylesheet" />-->
+    <link href="styles/bigvendor/bootstrap-responsive.css" rel="stylesheet" />
+
+    <!--messaging-->
+    <!--<script src="http://code.jquery.com/jquery-2.0.0.min.js" type="text/javascript"></script>-->
+    <!--<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"/>-->
+    <!--<link href="styles/bigvendor/bootstrap-combined-2.3.2.min.css" rel="stylesheet" />-->
+
+    <!--calendar-->
+    <!--<script src="scripts/bigvendor/jquery-2.1.3.js" type="text/javascript"></script>-->
+    <script src="scripts/bigvendor/jquery-ui.min.js" type="text/javascript"></script>
+	<!--<script src="scripts/vendor/bootstrap-2.3.1.min.js" type="text/javascript"></script>-->
+	<script src="scripts/bigvendor/moment.js"></script>
+	<!--<script src="scripts/vendor/angular-1.3.9.js"></script>-->
+	<script src="scripts/bigvendor/angular-moment-0.9.0.min.js"></script>
+	<script src="scripts/bigvendor/calendar.js"></script>
+    <link href="styles/bigvendor/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+	<script src="scripts/bigvendor/fullcalendar-2.2.6.min.js"></script>
+
+    <!-- mobiscroll -->
+    <!-- <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script> -->
+	<!--<script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>-->
+    <!-- <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script> -->
+	<script src="scripts/bigvendor/jquery.mobile-1.1.2.min.js" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
+	<link href="styles/bigvendor/jquery.mobile-1.1.2.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="scripts/mobiscroll/mobiscroll.core.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.jqm.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.ios.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.android.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/mobiscroll.android-ics.js" type="text/javascript"></script>
+
+    <script src="scripts/mobiscroll/i18n/mobiscroll.core-de.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/i18n/mobiscroll.core-hu.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/i18n/mobiscroll.core-es.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/i18n/mobiscroll.core-fr.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/i18n/mobiscroll.datetime-de.js" type="text/javascript"></script>
+    <script src="scripts/mobiscroll/i18n/mobiscroll.datetime-hu.js" type="text/javascript"></script> 
+    <script src="scripts/mobiscroll/i18n/mobiscroll.datetime-es.js" type="text/javascript"></script> 
+    <script src="scripts/mobiscroll/i18n/mobiscroll.datetime-fr.js" type="text/javascript"></script> 
+
+    <link href="styles/mobiscroll/mobiscroll.core.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mobiscroll/mobiscroll.jqm.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mobiscroll/mobiscroll.android.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mobiscroll/mobiscroll.android-ics.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mobiscroll/mobiscroll.ios.css" rel="stylesheet" type="text/css" />
+    <link href="styles/mobiscroll/mobiscroll.sense-ui.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Wijmo -->
+    <script src="scripts/vendor/wijmo.min.js" type="text/javascript"></script>
+    <script src="scripts/vendor/wijmo.input.min.js" type="text/javascript"></script>
+    <script src="scripts/vendor/wijmo.grid.min.js" type="text/javascript"></script>
+    <script src="scripts/vendor/wijmo.chart.min.js" type="text/javascript"></script>
+    <script src="scripts/vendor/wijmo.gauge.min.js" type="text/javascript"></script>
+    <link href="styles/vendor/wijmo.min.css" rel="stylesheet" />
+
+    <!-- Wijmo-Angular interop -->
+    <script src="scripts/vendor/wijmo.angular.min.js" type="text/javascript"></script>
+
+    <!-- custom Wijmo themes -->
+    <link ng-href="{{activeTheme}}" rel="stylesheet" />
+
+    <!--kanban board-->
+    <!-- <script src="http://cdn.webix.com/site/webix.js" type="text/javascript"></script> -->
+	<script src="scripts/webix.js" type="text/javascript"></script>
+	<!-- <script src="http://cdn.webix.com/site/kanban/kanban.js" type="text/javascript"></script> -->
+	<script src="scripts/kanban.js" type="text/javascript"></script>
+	<!-- css files -->
+	<!-- <link rel="stylesheet" href="http://cdn.webix.com/site/webix.css" type="text/css" charset="utf-8"> -->
+	<link href="styles/webix.css" rel="stylesheet" />
+	<!-- <link rel="stylesheet" href="http://cdn.webix.com/site/kanban/kanban.css" type="text/css" charset="utf-8"> -->
+	<link href="styles/kanban.css" rel="stylesheet" />
+
+    <!-- app scripts -->
+    <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/filters/appFilters.js" type="text/javascript"></script>
+    <script src="scripts/services/dataSvc.js" type="text/javascript"></script>
+    <script src="scripts/services/sparkSvc.js" type="text/javascript"></script>
+    <script src="scripts/services/menuSvc.js" type="text/javascript"></script>
+    <script src="scripts/controllers/navigationCtrl.js" type="text/javascript"></script>
+    <script src="scripts/controllers/basicCtrl.js" type="text/javascript"></script>
+    <script src="scripts/controllers/gaugeCtrl.js" type="text/javascript"></script>
+    <script src="scripts/controllers/inputCtrl.js" type="text/javascript"></script>
+
+    <script src="scripts/controllers/appCalendar.js" type="text/javascript"></script>
+    <script src="scripts/controllers/appMessages.js" type="text/javascript"></script>
+    <script src="scripts/controllers/appMissions.js" type="text/javascript"></script>
+    <script src="scripts/jquery.simplemodal-1.4.4.js" type="text/javascript"></script>
+
+    <script src="form.js" type="text/javascript"></script>
+    <style>
+ 		.avatar{
+			width: 100%;
+			height: 100%;
+		}
+		.critical .webix_kanban_list_content{
+			background-color: #fff2c1;
+			border-color:  #e0d7b7;
+			border-left-color:  #f5cf3d;
+		}
+    </style>
+
+    <!-- app styles -->
+    <link href="styles/app.css" rel="stylesheet" type="text/css" />
+</head>
+<!--<body style="background-color: lightsteelblue; overflow:scroll;">-->
+    <body style="overflow:scroll;">
+
+    <!--Mobile/Tablet Header-->
+    <div class="navbar navbar-inverse navbar-fixed-top visible-xs visible-sm" role="navigation" ng-controller="navigationCtrl">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="navCollapsed = !navCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="resources/wijmo5.png" width="25" alt="Wijmo 5" />
+                    <span class="hidden-sm">BU MET CS Dino Konstantopoulos</span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" ng-class="{in: !navCollapsed}">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in menuData" class="dropdown">
+                        <a href="#" target="_self" class="dropdown-toggle" data-toggle="dropdown">{{ item.section }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="link in item.links">
+                                <a ng-href="{{ link.url }}" ng-click="collapseMenu()">{{ link.text }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="visible-xs visible-sm theme-mobile">
+        <wj-menu value="activeTheme" header="Theme">
+            <wj-menu-item value="'~/'">Default</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cocoa.min.css'">Cocoa</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.coral.min.css'">Coral</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.dark.min.css'">Dark</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.grayscale.min.css'">Grayscale</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.highcontrast.min.css'">High Contrast</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.light.min.css'">Light</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.material.min.css'">Material</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.midnight.min.css'">Midnight</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.modern.min.css'">Modern</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.organic.min.css'">Organic</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.slate.min.css'">Slate</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.zen.min.css'">Zen</wj-menu-item>
+            <wj-menu-separator></wj-menu-separator>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cyborg.min.css'">Cyborg</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.superhero.min.css'">Superhero</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.flatly.min.css'">Flatly</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.darkly.min.css'">Darkly</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cerulean.min.css'">Cerulean</wj-menu-item>
+        </wj-menu>
+    </div>
+
+    <!--Desktop Header-->
+    <div class="header hidden-xs hidden-sm">
+        <div class="container" style="position:relative">
+            <h1>
+                <img src="resources/campus2.png" alt="BU" />
+                BU MET CS Dino Konstantopoulos
+            </h1>
+            <wj-menu value="activeTheme" header="Theme" style="position:absolute;right:10px;bottom:10px;color:black;background-color:white">
+                <wj-menu-item value="'~/'">Default</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cocoa.min.css'">Cocoa</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.coral.min.css'">Coral</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.dark.min.css'">Dark</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.grayscale.min.css'">Grayscale</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.highcontrast.min.css'">High Contrast</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.light.min.css'">Light</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.material.min.css'">Material</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.midnight.min.css'">Midnight</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.modern.min.css'">Modern</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.organic.min.css'">Organic</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.slate.min.css'">Slate</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.zen.min.css'">Zen</wj-menu-item>
+            <wj-menu-separator></wj-menu-separator>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cyborg.min.css'">Cyborg</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.superhero.min.css'">Superhero</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.flatly.min.css'">Flatly</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.darkly.min.css'">Darkly</wj-menu-item>
+            <wj-menu-item value="'styles/vendor/wijmo.theme.cerulean.min.css'">Cerulean</wj-menu-item>
+            </wj-menu>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="container" overflow-y: scroll;>
+        <div class="row">
+
+            <!-- navigation menu -->
+            <div class="col-md-2">
+                <div class="panel-group hidden-xs hidden-sm" id="accordion" ng-controller="navigationCtrl">
+                    <div ng-repeat="item in menuData" 
+                        class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" ng-href="#{{ item.section }}" target="_self">
+                                    {{ item.section }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="{{ item.section }}" class="panel-collapse collapse" ng-class="{ in: $first }">
+                            <div class="panel-body">
+                                <ul class="flatList">
+                                    <li ng-repeat="link in item.links">
+                                        <a ng-href="{{ link.url }}">{{ link.text }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- view -->
+            <div class="col-md-10" ng-view>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br />
+</body>
+</html>

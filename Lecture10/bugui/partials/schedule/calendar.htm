@@ -1,0 +1,130 @@
+<!-- No need to add ng-controller= reference because i added:
+     when('/piechart/Sorties', { templateUrl: 'partials/schedule/calendar.htm', controller: 'CalendarCtrl' }).
+    in app.js!app.config(['$routeProvider', function ($routeProvider) {-->
+<!--<div ng-controller="CalendarCtrl">-->
+<div>
+    <!--<div class="btn-toolbar">
+        <div class="btn-group">
+            <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+            <button class="btn btn-success" ng-click="changeView('week', myCalendar)">Week</button>
+            <button class="btn btn-success" ng-click="changeView('month', myCalendar)">Month</button>
+        </div>
+	</div>-->
+	
+	<div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+	
+	<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+    <h4>{{alertMessage}}</h4>
+	</div>
+
+    <!--Mobiscroll-->
+    <div data-role="page" data-theme="b">
+        <div data-role="header" data-theme="a">
+            <h1>Add New Seminar:</h1>
+        </div>
+
+        <div data-role="content" data-theme="d">
+            <form id="testform">
+
+                <div data-role="fieldcontain" hidden="true">
+                    <label for="theme">Theme</label>
+                    <select name="theme" id="theme" data-role="none">
+                        <option value="default">Default</option>
+                        <option value="jqm">jQuery Mobile</option>
+                        <option value="android-ics">Android ICS</option>
+                        <option value="android-ics light">Android ICS Light</option>
+                        <option value="android">Android</option>
+                        <option value="sense-ui">Sense UI</option>
+                        <option value="ios">iOS</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" hidden="true">
+                    <label for="mode">Mode</label>
+                    <select name="mode" id="mode" data-role="none">
+                        <option value="scroller">Scroller</option>
+                        <option value="clickpick">Clickpick</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" hidden="true">
+                    <label for="demo">Demo</label>
+                    <select name="demo" id="demo" data-role="none">
+                        <option value="datetime">Datetime</option>
+                        <option value="date">Date</option>
+                        <option value="time">Time</option>
+                        <option value="credit">Credit card expiration</option>
+                        <option value="btn">Show/Clear buttons</option>
+                        <option value="inline">Inline</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" hidden="true">
+                    <label for="language">Language</label>
+                    <select name="language" id="language" data-role="none">
+                        <option value="">English</option>
+                        <option value="de">Deutsch</option>
+                        <option value="hu">Magyar</option>
+                        <option value="es">Espanol</option>
+                        <option value="fr">Francais</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class="inline" hidden="true">
+                    <label for="test">Click here to try</label>
+                    <input type="text" name="test" id="test" />
+                    <div data-role="controlgroup" data-type="horizontal" id="buttons">
+                        <a href="#" id="trigger" data-role="button" data-icon="grid">Choose Date</a>
+                        <a href="#" id="clear" data-role="button" data-icon="delete">Clear</a>
+                    </div>
+                </div>
+
+                <div data-role="fieldcontain" class="inline">
+                    <label for="sortie">Seminar Title</label>
+                    <input type="text" name="sortie" id="sortie" />
+                    <!--<div data-role="controlgroup" data-type="horizontal" id="Div3">
+                        <a href="#" id="A1" data-role="button" data-icon="grid">Choose Date</a>
+                        <a href="#" id="A2" data-role="button" data-icon="delete">Clear</a>
+                    </div>-->
+                </div>
+
+                <div data-role="fieldcontain" class="inline">
+                    <label for="takeoff">Start</label>
+                    <input type="text" name="takeoff" id="takeoff" />
+                    <!--<div data-role="controlgroup" data-type="horizontal" id="Div3">
+                        <a href="#" id="A1" data-role="button" data-icon="grid">Choose Date</a>
+                        <a href="#" id="A2" data-role="button" data-icon="delete">Clear</a>
+                    </div>-->
+                </div>
+
+                <div data-role="fieldcontain" class="inline">
+                    <label for="land">Finish</label>
+                    <input type="text" name="land" id="land" />
+                    <!--<div data-role="controlgroup" data-type="horizontal" id="Div4">
+                        <a href="#" id="A3" data-role="button" data-icon="grid">Choose Date</a>
+                        <a href="#" id="A4" data-role="button" data-icon="delete">Clear</a>
+                    </div>-->
+                </div>
+
+                <div data-role="fieldcontain" class="inline">
+                    <button type="button" class="btn btn-primary" ng-click="addEvent()">
+                        Add Seminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div data-role="page" data-theme="b">
+        <div data-role="header" data-theme="a">
+            <h1>All Planned Seminars:</h1>
+        </div>
+
+   	    <ul class="unstyled">
+		    <li ng-repeat="e in events | filter:currentDate">
+			    <div class="alert alert-info">
+				    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
+				    <b> {{e.title}}</b> - Start: {{e.start | date:"MMM dd hh:mm"}} - End: {{e.end | date:"MMM dd hh:mm"}}
+			    </div>
+		    </li>
+	    </ul>
+    </div>
+</div>

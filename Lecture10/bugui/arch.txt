@@ -1,0 +1,36 @@
+Menu structure (served through menuSvc.js):
+data/menu.json
+
+static Models:
+data.js
+
+dynamic Models:
+services/dataSvc.js
+services/menuSvc.js
+services/sparkSvc.js
+
+ViewModels:
+partials/...
+
+Views:
+imgs
+resources
+
+Angular Directives (new html elements):
+scripts/appDctv.js
+
+Scripts:
+js
+
+Styles:
+css
+
+main entry point, with dependencies and routing information:
+app.js 
+
+framework:
+angular, bootstrap
+
+libraries:
+mobiscroll (touch), wijmo (UI widgets), webix kanban (portlet/workflow/task widgets), jquery, calendar, moment
+

@@ -1,0 +1,43 @@
+[
+    {
+        "section": "About",
+        "links":  [
+            { "text": "My Profile", "url": "#/profile/intro" },
+			{ "text": "My Messages", "url": "#/messages/email" },
+            { "text": "My Publications", "url": "#/profile/info" }
+        ]
+    },
+    {
+        "section": "Metropolitan",
+        "links":  [
+            { "text": "Instructors", "url": "#/colleges/instructors" },
+            { "text": "Classes", "url": "#/colleges/classes" },
+            { "text": "Roles", "url": "#/colleges/roles" },
+            { "text": "System", "url": "#/colleges/system" }
+        ]
+    },
+    {
+        "section": "Maintenance",
+        "links":  [
+            { "text": "Projectors", "url": "#/maintenance/projectors" },
+            { "text": "Classrooms", "url": "#/maintenance/classrooms" },
+            { "text": "Parking", "url": "#/maintenance/parking" },
+            { "text": "Reminders", "url": "#/maintenance/reminders" }
+        ]
+    },
+    {
+        "section": "Schedule",
+        "links":  [
+            { "text": "Manual", "url": "#/manuals/intro" },
+			{ "text": "Seminars", "url": "#/schedule/calendar" },
+			{ "text": "Committees", "url": "#/missions/kanban" }
+        ]
+    },
+    {
+        "section": "Reports",
+        "links":  [
+            { "text": "Department Reports", "url": "#/reports/department" },
+            { "text": "University Reports", "url": "#/reports/university" }
+        ]
+    }
+]

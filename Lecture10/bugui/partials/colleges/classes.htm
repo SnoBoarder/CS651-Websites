@@ -1,0 +1,68 @@
+<div>
+    <div class="copy">
+        <h3>
+            Classes</h3>
+        <p>
+            Established more than thirty years ago, MET’s Computer Science department remains a leader in a number of state-of-the-art IT areas, such as information security, computer networks, computer information systems, financial informatics, digital forensics, and health informatics. A regional and national leader in information security education for almost a decade, our curriculum is certified by the Committee on National Security Systems (CNSS).</p>
+
+        <div class="collapsed-content collapse">
+            <p>
+                Our world-class IT programs are driven by exceptional faculty whose scholarly accomplishments and unique industry experience place them among the top of their field. Adhering to the highest academic standards of BU, these dedicated scholars are involved in research projects in areas such as novel Internet architectures, smartphone applications, information assurance, and biomedical informatics</p>
+            <p>
+                Most importantly, our professors are fully engaged with their students, following their progress, maintaining awareness of what’s going on in their lives and careers, and providing the support they need. An academic advisor is available to help students make the best decisions about classes.</p>
+            <p>
+                Our part-time and online study options offer convenient times, locations, and delivery methods, ensuring that dedicated professionals have the opportunity to experience a rigorous academic environment while pursuing full-time careers. At the same time, we remain the first choice for a number of international students interested in the BU experience, and in continuing their academic development in computer science and information technology.</p>
+            <p>
+            The broad range of backgrounds, interests, and experiences that characterize the Metropolitan College student body is integral to our programs. Students and faculty alike are rewarded by the exchange of ideas and full participation in learning—and to us that is extremely important and valuable. By graduation, our students have the ability to analyze problems more efficiently, and they have a prestigious credential from Boston University—their key to the doors of academia and careers in the industry.
+            </p>
+            <p>
+            I invite you to join us in navigating the changing landscape of modern information technology—certainly the most exciting and invigorating discipline in which to study, explore, and work
+            </p>
+            <p>
+            Anatoly Temkin, Ph.D.
+Chairman, Department of Computer Science
+Boston University Metropolitan College
+            </p>
+        </div>
+        <p>
+            <button 
+                type="button" 
+                data-toggle="collapse"
+                data-target=".collapsed-content, .btn.btn-default.btn-xs.collapse"
+                class="btn btn-default btn-xs collapse in">
+                Read more
+            </button>
+        </p>
+    </div>
+
+    <div>
+
+        <!-- search box -->
+        <div class="row">
+            <div class="col-md-4 col-md-offset-0 col-xs-10 col-xs-offset-1">
+                <input type="text" class="form-control app-pad" placeholder="Filter" ng-model="ctx.filter" />
+            </div>
+            <div class="col-md-5 col-md-offset-3 col-xs-10 col-xs-offset-1">
+                <wj-collection-view-navigator cv="ctx.flex.collectionView" class="pull-right" />
+            </div>
+        </div>
+
+	<!-- the grid -->
+	<div>
+		<wj-flex-grid 
+            class="grid"
+            control="ctx.flex"
+            allow-resizing="Both"
+            items-source="ctx.data"
+            items-source-changed="itemsSourceChangedHandler()">
+			<wj-flex-grid-column header="ID" binding="id"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Nationality" binding="country"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Class" binding="product"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Department" binding="color"></wj-flex-grid-column>
+            <wj-flex-grid-column header="Professor ID" binding="tail"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Teaching Hours" binding="Hours"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Salary" binding="amount2" format="n0" aggregate="Sum"></wj-flex-grid-column>
+			<wj-flex-grid-column header="Discount" binding="discount" format="p0" aggregate="Avg"></wj-flex-grid-column>
+		</wj-flex-grid>
+	</div>
+</div>
