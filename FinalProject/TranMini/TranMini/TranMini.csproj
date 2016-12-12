@@ -145,11 +145,27 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="GameServer\Collidable.cs" />
+    <Compile Include="GameServer\CollisionManager.cs" />
+    <Compile Include="GameServer\ConnectionManager.cs" />
+    <Compile Include="GameServer\EnemyManager.cs" />
     <Compile Include="GameServer\Game.cs" />
+    <Compile Include="GameServer\GameConfiguration.cs" />
+    <Compile Include="GameServer\GameConfigurationManager.cs" />
+    <Compile Include="GameServer\GameHandler.cs" />
+    <Compile Include="GameServer\RegisteredClient.cs" />
+    <Compile Include="GameServer\Square.cs" />
+    <Compile Include="GameServer\SquareManager.cs" />
+    <Compile Include="GameServer\User.cs" />
+    <Compile Include="GameServer\UserHandler.cs" />
+    <Compile Include="GameServer\Util\GameTime.cs" />
+    <Compile Include="GameServer\Util\HighFrequencyTimer.cs" />
+    <Compile Include="GameServer\Vector2.cs" />
+    <Compile Include="GameServer\World.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\GameHub.cs" />
+    <Compile Include="GameServer\GameHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
