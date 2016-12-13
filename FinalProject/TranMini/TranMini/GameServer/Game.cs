@@ -27,6 +27,7 @@ namespace TranMini.GameServer
 		private long _drawCount = 0;
 		private long _actualFPS = 0;
 
+		public RuntimeConfiguration RuntimeConfiguration { get; set; }
 		public GameConfigurationManager Configuration { get; set; }
 		public UserHandler UserHandler { get; private set; }
 		public ConnectionManager ConnectionManager { get; private set; }
@@ -35,6 +36,9 @@ namespace TranMini.GameServer
 		// private constructor since this should be a singleton
 		private Game()
 		{
+			Configuration = new GameConfigurationManager();
+			_locker = new object();
+
 			_gameLoop = new HighFrequencyTimer(1000 / Configuration.gameConfig.UPDATE_INTERVAL, id => Update(id), () => { }, () => { }, (fps) =>
 			{
 				_actualFPS = fps;
@@ -66,28 +70,28 @@ namespace TranMini.GameServer
 
 				try
 				{
-		//			if ((utcNow - _lastSpawn).TotalSeconds >= 1 && _spawned < AIShipsToSpawn)
-		//			{
-		//				_spawned += SpawnsPerInterval;
-		//				SpawnAIShips(SpawnsPerInterval);
-		//				_lastSpawn = utcNow;
-		//			}
+					//			if ((utcNow - _lastSpawn).TotalSeconds >= 1 && _spawned < AIShipsToSpawn)
+					//			{
+					//				_spawned += SpawnsPerInterval;
+					//				SpawnAIShips(SpawnsPerInterval);
+					//				_lastSpawn = utcNow;
+					//			}
 
 					_gameTime.Update(utcNow);
 
 					GameHandler.Update(_gameTime);
 
-		//			_space.Update();
+					//			_space.Update();
 
-		//			if (_actualFPS <= _drawFPS || (++_drawCount) % DRAW_AFTER == 0)
-		//			{
-		//				Draw();
-		//				_drawCount = 0;
-		//			}
+					//			if (_actualFPS <= _drawFPS || (++_drawCount) % DRAW_AFTER == 0)
+					//			{
+					//				Draw();
+					//				_drawCount = 0;
+					//			}
 				}
 				catch (Exception e)
 				{
-		//			ErrorLog.Instance.Log(e);
+					//			ErrorLog.Instance.Log(e);
 				}
 
 				return id;
@@ -115,136 +119,126 @@ namespace TranMini.GameServer
 		/// Retrieves the game's configuration
 		/// </summary>
 		/// <returns>The game's configuration</returns>
-		//public object initializeClient(string connectionId, RegisteredClient rc)
-		//{
-		//	if (!UserHandler.UserExistsAndReady(connectionId))
-		//	{
-		//		try
-		//		{
-		//			lock (_locker)
-		//			{
-		//				User user = UserHandler.FindUserByIdentity(rc.Identity);
-		//				Ship ship;
+		public object initializeClient(string connectionId, RegisteredClient rc)
+		{
+			if (UserHandler.UserExistsAndReady(connectionId))
+				return null; // user already exists
 
-		//				if (user == null)
-		//				{
-		//					if (UserHandler.TotalActiveUsers >= RuntimeConfiguration.MaxServerUsers)
-		//					{
-		//						return new
-		//						{
-		//							ServerFull = true
-		//						};
-		//					}
-		//					else
-		//					{
-		//						ship = new Ship(RespawnManager.GetRandomStartPosition(), GameHandler.BulletManager);
-		//						ship.Name = rc.DisplayName;
-		//						user = new User(connectionId, ship, rc) { Controller = false };
-		//						UserHandler.AddUser(user);
-		//					}
-		//				}
-		//				else
-		//				{
-		//					string previousConnectionID = user.ConnectionID;
-		//					UserHandler.ReassignUser(connectionId, user);
-		//					ship = user.MyShip;
+			// user does not exist. setup client
+			try
+			{
+				lock (_locker)
+				{
+					User user = UserHandler.FindUserByIdentity(rc.Identity);
+					Square square;
 
-		//					if (user.Connected) // Check if it's a duplicate login
-		//					{
-		//						GetContext().Clients.Client(previousConnectionID).controlTransferred();
-		//						user.NotificationManager.Notify("Transfering control to this browser.  You were already logged in.");
-		//					}
-		//					else
-		//					{
-		//						ship.Disposed = false;
-		//						ship.LifeController.HealFull();
-		//						user.Connected = true;
-		//					}
+					if (user == null)
+					{
+						// user doesn't exist
 
-		//					user.IdleManager.RecordActivity();
-		//					user.IdleManager.Idle = false;
-		//				}
+						if (UserHandler.TotalActiveUsers >= RuntimeConfiguration.MaxServerUsers)
+						{
+							// server is full!
+							return new
+							{
+								ServerFull = true
+							};
+						}
+						else
+						{
+							// server is not full! generate a square for user
+							square = new Square();
+							square.Name = rc.DisplayName;
+							user = new User(connectionId, square, rc) { Controller = false };
+							UserHandler.AddUser(user);
+						}
+					}
+					else
+					{
+						// user exists!
+						string previousConnectionID = user.ConnectionID;
+						UserHandler.ReassignUser(connectionId, user);
+						square = user.MySquare;
 
-		//				GameHandler.AddShipToGame(ship);
-		//			}
+						if (user.Connected)
+						{
+							// user already logged in
+							GetContext().Clients.Client(previousConnectionID).controlTransferred();
+							//user.NotificationManager.Notify("Transfering control to this browser.  You were already logged in.");
+						}
+						else
+						{
+							// user was not connected
+							square.Disposed = false;
+							user.Connected = true;
+						}
 
-		//			return new
-		//			{
-		//				Configuration = Configuration,
-		//				ServerFull = false,
-		//				CompressionContracts = new
-		//				{
-		//					PayloadContract = _payloadManager.Compressor.PayloadCompressionContract,
-		//					CollidableContract = _payloadManager.Compressor.CollidableCompressionContract,
-		//					ShipContract = _payloadManager.Compressor.ShipCompressionContract,
-		//					BulletContract = _payloadManager.Compressor.BulletCompressionContract,
-		//					LeaderboardEntryContract = _payloadManager.Compressor.LeaderboardEntryCompressionContract,
-		//					PowerupContract = _payloadManager.Compressor.PowerupCompressionContract
-		//				},
-		//				ShipID = UserHandler.GetUserShip(connectionId).ID,
-		//				ShipName = UserHandler.GetUserShip(connectionId).Name
-		//			};
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			ErrorLog.Instance.Log(e);
-		//		}
-		//	}
+						//user.IdleManager.RecordActivity();
+						//user.IdleManager.Idle = false;
+					}
 
-		//	return null;
-		//}
+					GameHandler.AddSquareToGame(square);
+				}
+
+				return new
+				{
+					Configuration = Configuration,
+					ServerFull = false,
+					SquareID = UserHandler.GetUserSquare(connectionId).ID,
+					SquareName = UserHandler.GetUserSquare(connectionId).Name
+				};
+			}
+			catch (Exception e)
+			{
+				//ErrorLog.Instance.Log(e);
+			}
+
+			return null;
+		}
 
 		/// <summary>
 		/// Retrieves the game's configuration
 		/// </summary>
 		/// <returns>The game's configuration</returns>
-		//public object initializeController(string connectionId, RegisteredClient rc)
-		//{
-		//	if (!UserHandler.UserExistsAndReady(connectionId))
-		//	{
-		//		try
-		//		{
-		//			User main = UserHandler.FindUserByIdentity(rc.Identity);
+		public object initializeController(string connectionId, RegisteredClient rc)
+		{
+			if (UserHandler.UserExistsAndReady(connectionId))
+				return null;
 
-		//			if (main != null)
-		//			{
-		//				User controllerUser = new User(connectionId, rc) { Controller = true };
+			try
+			{
+				User main = UserHandler.FindUserByIdentity(rc.Identity);
 
-		//				controllerUser.MyShip = main.MyShip;
+				if (main != null)
+				{
+					User controllerUser = new User(connectionId, rc) { Controller = true };
 
-		//				UserHandler.AddUser(controllerUser);
-		//				main.RemoteControllers.Add(controllerUser);
+					controllerUser.MySquare = main.MySquare;
 
-		//				main.NotificationManager.Notify("Controller attached.");
+					UserHandler.AddUser(controllerUser);
+					main.RemoteControllers.Add(controllerUser);
 
-		//				return new
-		//				{
-		//					Configuration = Configuration,
-		//					CompressionContracts = new
-		//					{
-		//						PayloadContract = _payloadManager.Compressor.PayloadCompressionContract,
-		//						CollidableContract = _payloadManager.Compressor.CollidableCompressionContract,
-		//						ShipContract = _payloadManager.Compressor.ShipCompressionContract,
-		//						BulletContract = _payloadManager.Compressor.BulletCompressionContract,
-		//						LeaderboardEntryCompressionContract = _payloadManager.Compressor.LeaderboardEntryCompressionContract
-		//					}
-		//				};
-		//			}
-		//			else
-		//			{
-		//				return new
-		//				{
-		//					FailureMessage = "Could not find logged in user to control."
-		//				};
-		//			}
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			ErrorLog.Instance.Log(e);
-		//		}
-		//	}
+					//main.NotificationManager.Notify("Controller attached.");
 
-		//	return null;
-		//}
+					return new
+					{
+						Configuration = Configuration,
+					};
+				}
+				else
+				{
+					return new
+					{
+						FailureMessage = "Could not find logged in user to control."
+					};
+				}
+			}
+			catch (Exception e)
+			{
+				//ErrorLog.Instance.Log(e);
+			}
+
+			return null;
+		}
 	}
 }

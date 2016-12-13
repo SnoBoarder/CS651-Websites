@@ -9,9 +9,24 @@ namespace TranMini.GameServer
 	{
 		private List<Collidable> _objects;
 
+		private object _insertLock = new object();
+
 		public World()
 		{
 			_objects = new List<Collidable>();
+		}
+
+		public void Insert(Collidable obj)
+		{
+			lock (_insertLock)
+			{
+				_objects.Add(obj);
+			}
+		}
+
+		public void Remove(Collidable obj)
+		{
+			_objects.Remove(obj);
 		}
 	}
 }

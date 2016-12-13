@@ -9,6 +9,7 @@ namespace TranMini.GameServer
 {
 	public class Square : Collidable
 	{
+		public const string NAME_PREFIX = "Square";
 		public const int WIDTH = 10;
 		public const int HEIGHT = WIDTH;
 
@@ -18,12 +19,13 @@ namespace TranMini.GameServer
 
 		//private ConcurrentQueue<Action> _enqueuedCommands; // maybe?
 
+		public string Name { get; set; }
 		public User Host { get; set; }
 
 		public Square() : base(WIDTH, HEIGHT)
 		{
 			ID = Interlocked.Increment(ref _squareGUID);
-
+			Name = NAME_PREFIX + ID;
 			// handle death handler
 			//OnDeath += new DeathEventHandler((sender, e) => StatRecorder.ShipDeath(sender, e));
 
@@ -35,15 +37,15 @@ namespace TranMini.GameServer
 		{
 			base.Update();
 
-		//	Action command;
+			//	Action command;
 
-		//	while (_enqueuedCommands.Count > 0)
-		//	{
-		//		if (_enqueuedCommands.TryDequeue(out command) && !this.Disposed)
-		//		{
-		//			command();
-		//		}
-		//	}
+			//	while (_enqueuedCommands.Count > 0)
+			//	{
+			//		if (_enqueuedCommands.TryDequeue(out command) && !this.Disposed)
+			//		{
+			//			command();
+			//		}
+			//	}
 		}
 	}
 }

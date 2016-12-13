@@ -5,10 +5,12 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 using TranMini.GameServer;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace TranMini.GameServer
 {
-    public class GameHub : Hub
+	[HubName("game")]
+	public class GameHub : Hub
     {
 		private readonly Game _game;
 
@@ -105,7 +107,7 @@ namespace TranMini.GameServer
 						Clients.Caller.pingBack();
 					}
 
-					Square square = _game.UserHandler.GetUserShip(Context.ConnectionId);
+					Square square = _game.UserHandler.GetUserSquare(Context.ConnectionId);
 
 					//if (square.Controllable.Value)
 					//{

@@ -13,4 +13,5 @@ namespace TranMini.GameServer
 		{
 			gameConfig = new GameConfiguration();
 		}
+	}
 }

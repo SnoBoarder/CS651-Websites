@@ -19,7 +19,7 @@ namespace TranMini.GameServer
 			_world = world;
 
 			_squareManager = new SquareManager(this);
-			_collisionManager = new CollisionManager();
+			_collisionManager = new CollisionManager(_world);
 
 			enemyManager = new EnemyManager();
 		}
@@ -30,6 +30,15 @@ namespace TranMini.GameServer
 			enemyManager.Update(gameTime);
 
 			_collisionManager.Update(gameTime);
+		}
+
+		public void AddSquareToGame(Square square)
+		{
+			if (square != null)
+			{
+				_squareManager.Add(square);
+				_collisionManager.Monitor(square);
+			}
 		}
 	}
 }

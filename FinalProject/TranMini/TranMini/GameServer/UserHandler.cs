@@ -77,7 +77,7 @@ namespace TranMini.GameServer
 			return _userList[connectionId];
 		}
 
-		public Square GetUserShip(string connectionId)
+		public Square GetUserSquare(string connectionId)
 		{
 			return _userList[connectionId].MySquare;
 		}

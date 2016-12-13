@@ -8,8 +8,29 @@ namespace TranMini.GameServer
 {
 	public class CollisionManager
 	{
+		private List<Collidable> _objects;
+
+		private World _world;
+
+		public CollisionManager(World world)
+		{
+			_world = world;
+		}
 
 		public void Update(GameTime gameTime)
 		{
 		}
+
+		public void Monitor(Collidable obj)
+		{
+			_world.Insert(obj);
+			_objects.Add(obj);
+		}
+
+		public void UnMonitor(Collidable obj)
+		{
+			_world.Remove(obj);
+			_objects.Remove(obj);
+		}
+	}
 }

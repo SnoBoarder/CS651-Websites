@@ -70,7 +70,7 @@ namespace TranMini.GameServer
 
 		public void Update()
 		{
-			if (mySquare != null)
+			if (MySquare != null)
 			{
 				//IdleManager.Update();
 			}
