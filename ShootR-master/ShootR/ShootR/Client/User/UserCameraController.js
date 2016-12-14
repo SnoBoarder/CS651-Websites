@@ -12,40 +12,38 @@ var ShootR;
             this._movementTween.OnChange.Bind(function (newPosition) {
                 _this._camera.Position = newPosition;
             });
-
             this._started = false;
         }
         UserCameraController.prototype.Update = function (gameTime) {
             var ship = this._shipManager.GetShip(this._myShipId), distance;
-
             if (ship) {
+                // On the initial start of the game just position the camera directly over the ship
                 if (!this._started) {
                     this._started = true;
                     this._camera.Position = ship.MovementController.Position;
                     return;
                 }
-
                 distance = ship.MovementController.Position.Distance(this._camera.Position).Magnitude();
-
                 if (!this._movementTween.IsPlaying()) {
                     if (distance < UserCameraController.DISTANCE_THRESHOLD) {
                         this._camera.Position = ship.MovementController.Position;
-                    } else {
+                    }
+                    else {
                         this._movementTween.From = this._camera.Position;
                         this._movementTween.To = ship.MovementController.Position;
                         this._movementTween.Restart();
                     }
-                } else {
+                }
+                else {
                     this._movementTween.To = ship.MovementController.Position;
                 }
             }
-
             this._movementTween.Update(gameTime);
         };
         UserCameraController.DISTANCE_THRESHOLD = 500;
         UserCameraController.MOVEMENT_TIME = eg.TimeSpan.FromMilliseconds(500);
         return UserCameraController;
-    })();
+    }());
     ShootR.UserCameraController = UserCameraController;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=UserCameraController.js.map

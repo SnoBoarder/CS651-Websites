@@ -1,10 +1,9 @@
 /// <reference path="../../../Scripts/endgate-0.2.0.d.ts" />
 /// <reference path="../Levels/ShipLevelManager.ts" />
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var ShootR;
 (function (ShootR) {
@@ -13,7 +12,6 @@ var ShootR;
         function ShipBodyGraphic(levelManager) {
             var _this = this;
             _super.call(this, 0, 0, this.DetermineBody(levelManager));
-
             levelManager.OnLevelChange.Bind(function (newLevel) {
                 _this.Image = _this.DetermineBody(levelManager);
             });
@@ -21,11 +19,9 @@ var ShootR;
         ShipBodyGraphic.prototype.DetermineBody = function (levelManager) {
             return ShipBodyGraphic._bodyGraphics[Math.min(levelManager.Level, 13)];
         };
-
-        ShipBodyGraphic.LoadShipBodies = // Made as a static so we don't have to construct the ship bodies every time a new ship is created.
-        function (contentManager) {
+        // Made as a static so we don't have to construct the ship bodies every time a new ship is created.
+        ShipBodyGraphic.LoadShipBodies = function (contentManager) {
             ShipBodyGraphic._bodyGraphics = new Array();
-
             ShipBodyGraphic._bodyGraphics[1] = ShipBodyGraphic._bodyGraphics[2] = contentManager.GetImage("Ship1");
             ShipBodyGraphic._bodyGraphics[3] = ShipBodyGraphic._bodyGraphics[4] = contentManager.GetImage("Ship3");
             ShipBodyGraphic._bodyGraphics[5] = ShipBodyGraphic._bodyGraphics[6] = contentManager.GetImage("Ship5");
@@ -37,7 +33,7 @@ var ShootR;
             ShipBodyGraphic._bodyGraphics[13] = contentManager.GetImage("Ship10");
         };
         return ShipBodyGraphic;
-    })(eg.Graphics.Sprite2d);
+    }(eg.Graphics.Sprite2d));
     ShootR.ShipBodyGraphic = ShipBodyGraphic;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipBodyGraphic.js.map

@@ -11,17 +11,14 @@ var ShootR;
             this.Active = true;
             this.ActivatedAt = new Date();
         };
-
         Ability.prototype.Deactivate = function () {
             this.Active = false;
             this.ActivatedAt = null;
         };
-
         // Meant to be overridden
-        Ability.prototype.Update = function (gameTime) {
-        };
+        Ability.prototype.Update = function (gameTime) { };
         return Ability;
-    })();
+    }());
     ShootR.Ability = Ability;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=Ability.js.map

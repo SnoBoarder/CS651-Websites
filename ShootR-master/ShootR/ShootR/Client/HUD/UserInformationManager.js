@@ -14,7 +14,7 @@ var ShootR;
             this._youLB.attr("src", userInformation.Photo);
         }
         return UserInformationManager;
-    })();
+    }());
     ShootR.UserInformationManager = UserInformationManager;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=UserInformationManager.js.map

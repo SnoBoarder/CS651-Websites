@@ -1,11 +1,10 @@
 /// <reference path="../../../Scripts/endgate-0.2.0.d.ts" />
 /// <reference path="../Ship.ts" />
 /// <reference path="../../Common/Animation.ts" />
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var ShootR;
 (function (ShootR) {
@@ -19,7 +18,6 @@ var ShootR;
             this.Visible = true;
             _super.prototype.Play.call(this, true);
         };
-
         ShipBoostAnimation.prototype.Stop = function () {
             this.Visible = false;
             _super.prototype.Stop.call(this);
@@ -28,7 +26,7 @@ var ShootR;
         ShipBoostAnimation.FRAME_COUNT = 10;
         ShipBoostAnimation.FPS = 12;
         return ShipBoostAnimation;
-    })(ShootR.Animation);
+    }(ShootR.Animation));
     ShootR.ShipBoostAnimation = ShipBoostAnimation;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipBoostAnimation.js.map

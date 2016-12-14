@@ -21,12 +21,11 @@ var ShootR;
             this._worldBullets[0].innerHTML = payload.BulletsInWorld.toString();
             this._worldTargets[0].innerHTML = payload.ShipsInWorld.toString();
         };
-
         EnvironmentMonitor.prototype.Update = function (ship) {
             this._area[0].innerHTML = this._areaRenderer.AreaFromPosition(ship.MovementController.Position).toString();
         };
         return EnvironmentMonitor;
-    })();
+    }());
     ShootR.EnvironmentMonitor = EnvironmentMonitor;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=EnvironmentMonitor.js.map

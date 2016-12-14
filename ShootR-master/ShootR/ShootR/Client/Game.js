@@ -12,11 +12,10 @@
 /// <reference path="GameScreen.ts" />
 /// <reference path="HUD/HUDManager.ts" />
 /// <reference path="Ships/Graphics/ShipBodyGraphic.ts" />
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var ShootR;
 (function (ShootR) {
@@ -25,12 +24,9 @@ var ShootR;
         function Game(gameCanvas, gameScreen, serverAdapter, initializationData) {
             var _this = this;
             _super.call(this, gameCanvas);
-
             Game.GameConfiguration = new ShootR.ConfigurationManager(initializationData.Configuration);
-
-            this.Configuration.CollisionConfiguration.MinQuadTreeNodeSize = new eg.Size2d(75);
-            this.Configuration.CollisionConfiguration.InitialQuadTreeSize = new eg.Size2d(10125);
-
+            this.Configuration.CollisionConfiguration.MinQuadTreeNodeSize = new eg.Size2d(75); // Size of a ship
+            this.Configuration.CollisionConfiguration.InitialQuadTreeSize = new eg.Size2d(10125); // Initial Map Size x 2
             this._bufferedViewport = new eg.Bounds.BoundingRectangle(this.Scene.Camera.Position, this.Scene.Camera.Size.Add(ShootR.GameScreen.SCREEN_BUFFER_AREA));
             this._shipManager = new ShootR.ShipManager(this._bufferedViewport, this.Scene, this.CollisionManager, this.Content);
             this._shipManager.Initialize(new ShootR.UserShipManager(initializationData.ShipID, this._shipManager, this.CollisionManager, this.Input, this.Scene.Camera, serverAdapter));
@@ -39,7 +35,6 @@ var ShootR;
             this._map = new ShootR.Map(this.Scene, this.CollisionManager, this.Content, this.Input.Keyboard, serverAdapter);
             this._debugManager = new ShootR.Debug.DebugManager(initializationData.ShipID, this, serverAdapter);
             this._hud = new ShootR.HUDManager(initializationData, this._shipManager, this._map.AreaRenderer, this.Input.Keyboard, serverAdapter);
-
             serverAdapter.OnPayload.Bind(function (payload) {
                 _this._shipManager.LoadPayload(payload);
                 _this._bulletManager.LoadPayload(payload);
@@ -47,7 +42,6 @@ var ShootR;
                 _this._hud.LoadPayload(payload);
                 _this._debugManager.LoadPayload(payload);
             });
-
             gameScreen.OnResize.Bind(function (newSize) {
                 _this._hud.OnScreenResize(newSize);
                 _this._bufferedViewport.Size = newSize.Add(ShootR.GameScreen.SCREEN_BUFFER_AREA);
@@ -74,20 +68,16 @@ var ShootR;
             this.Content.LoadImage("ShipDamage3", "/Images/Ships/Damage/damage_2.png", 75, 75);
             this.Content.LoadImage("ShipDamage5", "/Images/Ships/Damage/damage_3.png", 75, 75);
             this.Content.LoadImage("ShipDamage7", "/Images/Ships/Damage/damage_4.png", 75, 75);
-
             ShootR.ShipBodyGraphic.LoadShipBodies(this.Content);
         };
-
         Game.prototype.Update = function (gameTime) {
             this._bufferedViewport.Position = this.Scene.Camera.Position;
-
             this._shipManager.Update(gameTime);
             this._bulletManager.Update(gameTime);
             this._powerupManager.Update(gameTime);
             this._hud.Update(gameTime);
             this._debugManager.Update(gameTime);
         };
-
         // Most drawing takes place via the Scene.
         // This method can be used to draw items to the game screen with raw canvas API's.
         // I don't do this because there's no need :), i only update the debug manager in order to track the draw rate.
@@ -95,7 +85,7 @@ var ShootR;
             this._debugManager.Draw(context);
         };
         return Game;
-    })(eg.Game);
+    }(eg.Game));
     ShootR.Game = Game;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=Game.js.map

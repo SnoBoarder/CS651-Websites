@@ -36,29 +36,21 @@ var ShootR;
                 this.YouDied(payload.KilledByName, payload.KilledByPhoto);
             }
         };
-
         DeathScreen.prototype.YouDied = function (by, byPhoto) {
             var _this = this;
             var quote = Math.floor(Math.random() * this._randomQuotes.length);
-
             this._topLineQuote[0].innerHTML = this._randomQuotes[quote][0];
             this._botLineQuote[0].innerHTML = this._randomQuotes[quote][1];
-
             this._killedByName.text(by);
             this._killedByPhoto.attr("src", byPhoto);
-
             this._popupWindows.css("display", "block");
             this._doublePopupHolder.css("display", "block");
-
             this._popupWindows.addClass("goLeft");
-
             this._fadeIns.fadeIn(1000);
             this._respawnTime[0].innerHTML = DeathScreen.RESPAWN_TIMER.Seconds.toString();
-
             var interval = setInterval(function () {
                 var left = parseInt(_this._respawnTime[0].innerHTML) - 1;
                 _this._respawnTime[0].innerHTML = left.toString();
-
                 if (left === 0) {
                     clearInterval(interval);
                     _this._fadeIns.fadeOut(1000, function () {
@@ -70,7 +62,7 @@ var ShootR;
             }, 1000);
         };
         return DeathScreen;
-    })();
+    }());
     ShootR.DeathScreen = DeathScreen;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=DeathScreen.js.map

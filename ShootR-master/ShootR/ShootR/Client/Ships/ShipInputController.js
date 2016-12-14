@@ -16,7 +16,6 @@ var ShootR;
                 RotatingRight: false
             };
             this._lastBoostTap = new Date();
-
             this.BindKeys(["w"], "OnCommandDown", "Forward", true);
             this.BindKeys(["d"], "OnCommandDown", "RotatingRight", true);
             this.BindKeys(["s"], "OnCommandDown", "Backward", true);
@@ -25,17 +24,15 @@ var ShootR;
             this.BindKeys(["d"], "OnCommandUp", "RotatingRight", false);
             this.BindKeys(["s"], "OnCommandUp", "Backward", false);
             this.BindKeys(["a"], "OnCommandUp", "RotatingLeft", false);
-
             this._keyboard.OnCommandUp("w", function () {
                 var now = new Date();
-
                 if (eg.TimeSpan.DateSpan(_this._lastBoostTap, now).Milliseconds <= ShipInputController.DOUBLE_TAP_AFTER.Milliseconds) {
                     _this._onMove("Boost", true);
-                } else {
+                }
+                else {
                     _this._lastBoostTap = now;
                 }
             });
-
             this._fireController = new ShootR.ShipFireController(this._keyboard, this._onFire);
         }
         ShipInputController.prototype.BindKeys = function (keyList, bindingAction, direction, startMoving) {
@@ -51,7 +48,7 @@ var ShootR;
         };
         ShipInputController.DOUBLE_TAP_AFTER = eg.TimeSpan.FromMilliseconds(350);
         return ShipInputController;
-    })();
+    }());
     ShootR.ShipInputController = ShipInputController;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipInputController.js.map

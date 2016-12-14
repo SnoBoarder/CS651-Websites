@@ -15,59 +15,50 @@ var ShootR;
         ShipManager.prototype.Initialize = function (userShipManager) {
             this.UserShipManager = userShipManager;
         };
-
         ShipManager.prototype.UpdateViewport = function (viewport) {
             this._viewport.Size = viewport;
         };
-
         ShipManager.prototype.GetShip = function (id) {
             return this._ships[id];
         };
-
         ShipManager.prototype.RemoveShip = function (shipID) {
             delete this._ships[shipID];
         };
-
         ShipManager.prototype.LoadPayload = function (payload) {
             var _this = this;
             var shipPayload = payload.Ships, ship;
-
             for (var i = 0; i < shipPayload.length; i++) {
                 ship = shipPayload[i];
-
                 if (!this._ships[ship.ID]) {
                     if (ship.ID === this.UserShipManager.ControlledShipId) {
                         ship.UserControlled = true;
-                    } else {
+                    }
+                    else {
                         ship.UserControlled = false;
                     }
-
                     this._ships[ship.ID] = new ShootR.Ship(ship, this._contentManager);
                     this._collisionManager.Monitor(this._ships[ship.ID]);
                     this._scene.Add(this._ships[ship.ID].Graphic);
-
                     this._ships[ship.ID].OnDisposed.Bind(function (ship) {
-                        delete _this._ships[(ship).ID];
+                        delete _this._ships[ship.ID];
                     });
-                } else {
+                }
+                else {
                     this._ships[ship.ID].LoadPayload(ship);
                 }
-
                 if (ship.Disposed) {
                     this._ships[ship.ID].Destroy(!ship.LifeController.Alive);
                 }
             }
-
             this.UserShipManager.LoadPayload(payload);
         };
-
         ShipManager.prototype.Update = function (gameTime) {
+            // Update positions first
             for (var id in this._ships) {
                 this._ships[id].Update(gameTime);
             }
-
             this.UserShipManager.Update(gameTime);
-
+            // Check for "in-bounds" to see what ships we should destroy
             for (var id in this._ships) {
                 if (!this._ships[id].Bounds.IntersectsRectangle(this._viewport)) {
                     this._ships[id].Destroy();
@@ -75,7 +66,7 @@ var ShootR;
             }
         };
         return ShipManager;
-    })();
+    }());
     ShootR.ShipManager = ShipManager;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipManager.js.map

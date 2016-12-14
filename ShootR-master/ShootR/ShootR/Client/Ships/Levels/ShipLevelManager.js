@@ -14,7 +14,6 @@ var ShootR;
                 this.OnLevelChange.Trigger(this.Level);
             }
         };
-
         ShipLevelManager.prototype.UpdateExperience = function (experience, experienceToNextLevel) {
             if (experience !== this.Experience || experienceToNextLevel !== this.ExperienceToNextLevel) {
                 this.Experience = experience;
@@ -23,7 +22,7 @@ var ShootR;
             }
         };
         return ShipLevelManager;
-    })();
+    }());
     ShootR.ShipLevelManager = ShipLevelManager;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=ShipLevelManager.js.map
