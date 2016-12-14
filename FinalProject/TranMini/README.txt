@@ -1,6 +1,9 @@
 Write all packages to install:
-- Install-Package jquery
-- Install-Package
+- Install-Package jquery typescript
+- Install-Package jquery cookie typescript
+- Install-Package signalR typescript
+- Install-Package jquery.cookie
+- Install-Package Microsoft.Owin.Security.Cookies
 
 http://tranmini.azurewebsites.net/Home/Game
 
@@ -11,6 +14,7 @@ Things I used:
 - Phaser
 - TypeScript
 - .NET MVC Framework 4.6
+- egate
 
 Hiccups:
 - BundleConfig

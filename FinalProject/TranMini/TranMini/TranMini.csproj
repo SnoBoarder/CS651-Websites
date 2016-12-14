@@ -74,16 +74,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -161,16 +165,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authentication\TranMiniAuthenticationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="GameServer\Collidable.cs" />
     <Compile Include="GameServer\CollisionManager.cs" />
+    <Compile Include="GameServer\PayloadManagement\CompressionContracts\PayloadCompressionContract.cs" />
+    <Compile Include="GameServer\PayloadManagement\CompressionContracts\SquareCompressionContract.cs" />
     <Compile Include="GameServer\ConnectionManager.cs" />
     <Compile Include="GameServer\EnemyManager.cs" />
     <Compile Include="GameServer\Game.cs" />
     <Compile Include="GameServer\GameConfiguration.cs" />
     <Compile Include="GameServer\GameConfigurationManager.cs" />
     <Compile Include="GameServer\GameHandler.cs" />
+    <Compile Include="GameServer\PayloadManagement\Payload.cs" />
+    <Compile Include="GameServer\PayloadManagement\PayloadCache.cs" />
+    <Compile Include="GameServer\PayloadManagement\PayloadCompressor.cs" />
+    <Compile Include="GameServer\PayloadManagement\PayloadManager.cs" />
     <Compile Include="GameServer\RegisteredClient.cs" />
+    <Compile Include="GameServer\RegistrationHandler.cs" />
     <Compile Include="GameServer\RuntimeConfiguration.cs" />
     <Compile Include="GameServer\Square.cs" />
     <Compile Include="GameServer\SquareManager.cs" />
@@ -198,10 +210,15 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\TranMini - Web Deploy.pubxml" />
+    <Content Include="Scripts\endgate-0.2.0.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\endgate-0.2.0.js" />
+    <Content Include="Scripts\endgate-0.2.0.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -248,12 +265,27 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="GameClient\ConfigurationManager.ts" />
     <TypeScriptCompile Include="GameClient\Game.ts" />
+    <TypeScriptCompile Include="GameClient\IClientInitialization.ts" />
+    <TypeScriptCompile Include="GameClient\IConfigurationDefinitions.ts" />
+    <TypeScriptCompile Include="GameClient\IPayloadDefinitions.ts" />
+    <TypeScriptCompile Include="GameClient\IUserInformation.ts" />
+    <TypeScriptCompile Include="GameClient\LatencyResolver.ts" />
     <TypeScriptCompile Include="GameClient\Main.ts" />
+    <TypeScriptCompile Include="GameClient\PayloadDecompressor.ts" />
     <TypeScriptCompile Include="GameClient\ServerAdapter.ts" />
+    <TypeScriptCompile Include="GameClient\ServerConnectionManager.ts" />
+    <TypeScriptCompile Include="GameClient\Square.ts" />
+    <TypeScriptCompile Include="GameClient\SquareGraphic.ts" />
+    <TypeScriptCompile Include="GameClient\SquareManager.ts" />
+    <TypeScriptCompile Include="GameClient\UserSquareManager.ts" />
+    <TypeScriptCompile Include="GameClient\UtilityFunctions.ts" />
+    <TypeScriptCompile Include="Scripts\endgate-0.2.0.d.ts" />
     <TypeScriptCompile Include="Scripts\p2.d.ts" />
     <TypeScriptCompile Include="Scripts\phaser.d.ts" />
     <TypeScriptCompile Include="Scripts\pixi.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.cookie\jquery.cookie.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
   </ItemGroup>

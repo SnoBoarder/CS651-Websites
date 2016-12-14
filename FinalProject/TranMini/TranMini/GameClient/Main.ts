@@ -7,8 +7,17 @@ $(function () {
     //http://stackoverflow.com/questions/31160722/typescript-how-to-import-classes-uncaught-referenceerror
 
     var connection = (<any>$.connection).game;
-    var gameCanvas: JQuery = $("#game");
     var serverAdapter: TranMini.Server.ServerAdapter = new TranMini.Server.ServerAdapter($.connection.hub, connection, "tranmini.state");
+    var game: TranMini.Game;// = new TranMini.Game("game", serverAdapter);
+
+
+    serverAdapter.Negotiate().done((initializationData: TranMini.Server.IClientInitialization) => {
+        //loadContent.hide();
+        //gameContent.show();
+
+        game = new TranMini.Game(serverAdapter, initializationData);//new TranMini.Game(<HTMLCanvasElement>gameCanvas[0], gameScreen, serverAdapter, initializationData);
+    });
+
     //    popUpHolder: JQuery = $("#popUpHolder"),
     //    gameContent: JQuery = $("#gameContent"),
     //    loadContent: JQuery = $("#loadContent"),
@@ -25,6 +34,4 @@ $(function () {
     //        gameScreen.ForceResizeCheck();
     //    });
     //}, 1);
-
-    console.log("test");
 });

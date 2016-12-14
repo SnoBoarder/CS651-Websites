@@ -16,18 +16,16 @@ var ShootR;
             enumerable: true,
             configurable: true
         });
-
         LifeController.prototype.LoadPayload = function (payload) {
             this.Alive = payload.LifeController.Alive;
             if (this.Health !== payload.LifeController.Health || this.MaxHealth !== payload.MaxLife) {
                 this.Health = payload.LifeController.Health;
                 this.MaxHealth = payload.MaxLife;
-
                 this.OnLifeChange.Trigger(this.Health, this.MaxHealth);
             }
         };
         return LifeController;
-    })();
+    }());
     ShootR.LifeController = LifeController;
 })(ShootR || (ShootR = {}));
 //# sourceMappingURL=LifeController.js.map

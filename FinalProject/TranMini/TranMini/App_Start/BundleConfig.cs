@@ -8,8 +8,9 @@ namespace TranMini
 		// For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-						"~/Scripts/jquery-{version}.js"));
+			bundles.Add(new ScriptBundle("~/bundles/jquery")
+				.Include("~/Scripts/jquery-{version}.js")
+				.Include("~/Scripts/jquery.cookie.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
 						"~/Scripts/jquery.validate*"));
@@ -32,11 +33,25 @@ namespace TranMini
 					  "~/Content/site.css"));
 
 			bundles.Add(new ScriptBundle("~/bundles/gamejs")
-				.Include("~/GameClient/ServerAdapter.js")
+				.Include("~/Scripts/endgate-{version}.js")
 				.Include("~/Scripts/p2.js")
 				.Include("~/Scripts/pixi.js")
 				.Include("~/Scripts/phaser.js")
+				.Include("~/GameClient/IClientInitialization.js")
+				.Include("~/GameClient/IConfigurationDefinition.js")
+				.Include("~/GameClient/IPayloadDefinition.js")
+				.Include("~/GameClient/IUserInformation.js")
+				.Include("~/GameClient/UtilityFunction.js")
+				.Include("~/GameClient/LatencyResolver.js")
+				.Include("~/GameClient/PayloadDecompressor.js")
+				.Include("~/GameClient/ServerConnectionManager.js")
+				.Include("~/GameClient/ServerAdapter.js")
+				.Include("~/GameClient/Square.js")
+				.Include("~/GameClient/SquareGraphic.js")
+				.Include("~/GameClient/UserSquareManager.js")
+				.Include("~/GameClient/SquareManager.js")
 				.Include("~/GameClient/Game.js")
+				.Include("~/GameClient/ConfigurationManager.js")
 				.Include("~/GameClient/Main.js"));
 		}
 	}

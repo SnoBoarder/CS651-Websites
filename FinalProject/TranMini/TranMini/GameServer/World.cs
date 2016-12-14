@@ -16,6 +16,13 @@ namespace TranMini.GameServer
 			_objects = new List<Collidable>();
 		}
 
+		public List<Collidable> objects {
+			get
+			{
+				return _objects;
+			}
+		}
+
 		public void Insert(Collidable obj)
 		{
 			lock (_insertLock)

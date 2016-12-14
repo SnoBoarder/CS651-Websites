@@ -15,6 +15,7 @@ namespace TranMini.GameServer
 		public CollisionManager(World world)
 		{
 			_world = world;
+			_objects = new List<Collidable>();
 		}
 
 		public void Update(GameTime gameTime)

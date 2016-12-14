@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,8 @@ namespace TranMini.GameServer
 			}
 		}
 
+		private PayloadManager _payloadManager;
+
 		private HighFrequencyTimer _gameLoop;
 		private GameTime _gameTime;
 		private World _world;
@@ -26,35 +29,46 @@ namespace TranMini.GameServer
 
 		private long _drawCount = 0;
 		private long _actualFPS = 0;
+		private long _drawFPS = 0;
+		private int DRAW_AFTER;
 
 		public RuntimeConfiguration RuntimeConfiguration { get; set; }
 		public GameConfigurationManager Configuration { get; set; }
 		public UserHandler UserHandler { get; private set; }
 		public ConnectionManager ConnectionManager { get; private set; }
 		public GameHandler GameHandler { get; set; }
+		public RegistrationHandler RegistrationHandler { get; private set; }
 
 		// private constructor since this should be a singleton
 		private Game()
 		{
-			Configuration = new GameConfigurationManager();
 			_locker = new object();
+
+			Configuration = new GameConfigurationManager();
+			RegistrationHandler = new RegistrationHandler();
+			RuntimeConfiguration = new RuntimeConfiguration();
+
+			DRAW_AFTER = Configuration.gameConfig.DRAW_INTERVAL / Configuration.gameConfig.UPDATE_INTERVAL;
+			_drawFPS = 1000 / Configuration.gameConfig.DRAW_INTERVAL;
 
 			_gameLoop = new HighFrequencyTimer(1000 / Configuration.gameConfig.UPDATE_INTERVAL, id => Update(id), () => { }, () => { }, (fps) =>
 			{
 				_actualFPS = fps;
 			});
 
-			// TODO: make game time
+			_gameTime = new GameTime();
 
 			_world = new World();
 			GameHandler = new GameHandler(_world);
 
-			//_payloadManager = new PayloadManager();
+			_payloadManager = new PayloadManager();
 
 			// RegistraionHandler
 
 			UserHandler = new UserHandler(GameHandler);
 			ConnectionManager = new ConnectionManager(UserHandler, _locker);
+
+			_gameLoop.Start();
 		}
 
 		public static IHubContext GetContext()
@@ -83,11 +97,11 @@ namespace TranMini.GameServer
 
 					//			_space.Update();
 
-					//			if (_actualFPS <= _drawFPS || (++_drawCount) % DRAW_AFTER == 0)
-					//			{
-					//				Draw();
-					//				_drawCount = 0;
-					//			}
+					if (_actualFPS <= _drawFPS || (++_drawCount) % DRAW_AFTER == 0)
+					{
+						Draw();
+						_drawCount = 0;
+					}
 				}
 				catch (Exception e)
 				{
@@ -101,19 +115,19 @@ namespace TranMini.GameServer
 		/// <summary>
 		/// Sends down batches of data to the clients in order to update their screens
 		/// </summary>
-		//private void Draw()
-		//{
-		//	_space.CheckIncreaseMapSize(UserHandler.TotalActiveUsers);
-		//	UserHandler.Update();
+		private void Draw()
+		{
+			//_world.CheckIncreaseMapSize(UserHandler.TotalActiveUsers);
+			UserHandler.Update();
 
-		//	ConcurrentDictionary<string, object[]> payloads = _payloadManager.GetGamePayloads(UserHandler.GetUsers(), UserHandler.TotalActiveUsers, GameHandler.BulletManager.Bullets.Count, _space);
-		//	IHubContext context = GetContext();
+			ConcurrentDictionary<string, object[]> payloads = _payloadManager.GetGamePayloads(UserHandler.GetUsers(), UserHandler.TotalActiveUsers, _world);
+			IHubContext context = GetContext();
 
-		//	foreach (string connectionID in payloads.Keys)
-		//	{
-		//		UserHandler.GetUser(connectionID).PushToClient(payloads[connectionID], context);
-		//	}
-		//}
+			foreach (string connectionID in payloads.Keys)
+			{
+				UserHandler.GetUser(connectionID).PushToClient(payloads[connectionID], context);
+			}
+		}
 
 		/// <summary>
 		/// Retrieves the game's configuration
@@ -185,11 +199,19 @@ namespace TranMini.GameServer
 					Configuration = Configuration,
 					ServerFull = false,
 					SquareID = UserHandler.GetUserSquare(connectionId).ID,
-					SquareName = UserHandler.GetUserSquare(connectionId).Name
+					SquareName = UserHandler.GetUserSquare(connectionId).Name,
+					CompressionContracts = new
+					{
+						PayloadContract = _payloadManager.Compressor.PayloadCompressionContract,
+						SquareContract = _payloadManager.Compressor.SquareCompressionContract
+						//CollidableContract = _payloadManager.Compressor.CollidableCompressionContract,
+						//BulletContract = _payloadManager.Compressor.BulletCompressionContract,
+					}
 				};
 			}
 			catch (Exception e)
 			{
+				Console.WriteLine(e);
 				//ErrorLog.Instance.Log(e);
 			}
 

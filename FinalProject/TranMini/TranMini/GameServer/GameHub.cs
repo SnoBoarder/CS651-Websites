@@ -62,10 +62,10 @@ namespace TranMini.GameServer
 		/// <returns>The game's configuration</returns>
 		public object initializeClient(string registrationID)
 		{
-			//if (_game.RegistrationHandler.RegistrationExists(registrationID))
-			//{
-			//	return _game.initializeClient(Context.ConnectionId, _game.RegistrationHandler.RemoveRegistration(registrationID));
-			//}
+			if (_game.RegistrationHandler.RegistrationExists(registrationID))
+			{
+				return _game.initializeClient(Context.ConnectionId, _game.RegistrationHandler.RemoveRegistration(registrationID));
+			}
 
 			return null;
 		}

@@ -10,7 +10,6 @@ namespace TranMini.GameServer
 		public string RegistrationID { get; set; }
 		public string Identity { get; set; }
 		public string DisplayName { get; set; }
-		public string Photo { get; set; }
 
 		private DateTime _initialized;
 
@@ -18,12 +17,11 @@ namespace TranMini.GameServer
 		{
 		}
 
-		public RegisteredClient(string registrationID, string identity, string displayName, string photo)
+		public RegisteredClient(string registrationID, string identity, string displayName)
 		{
 			RegistrationID = registrationID;
 			Identity = identity;
 			DisplayName = displayName;
-			Photo = photo;
 
 			_initialized = DateTime.UtcNow;
 		}

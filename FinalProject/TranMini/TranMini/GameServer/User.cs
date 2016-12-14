@@ -29,7 +29,7 @@ namespace TranMini.GameServer
 			RegistrationTicket = rc;
 			ConnectionID = connectionID;
 			MySquare = square;
-			//ReadyForPayloads = false;
+			ReadyForPayloads = false;
 			//Viewport = new Size(0, 0); // Initialize the viewport to 0 by 0
 			RemoteControllers = new List<User>();
 			//IdleManager = new IdleManager(square, NotificationManager);
@@ -41,10 +41,10 @@ namespace TranMini.GameServer
 			}
 		}
 
-		//public virtual void PushToClient(object[] payload, IHubContext context)
-		//{
-		//	context.Clients.Client(ConnectionID).d(payload);
-		//}
+		public virtual void PushToClient(object[] payload, IHubContext context)
+		{
+			context.Clients.Client(ConnectionID).d(payload);
+		}
 
 		//private Size _viewport;
 		//public Size Viewport
