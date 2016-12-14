@@ -21,3 +21,16 @@ Hiccups:
 	- The BundleConfig needs to be setup to compile all typescript files properly
 - TypeScript
 	- Syntax!
+
+
+PayloadDecompressor
+ServerConnectionManager
+LatencyResolver
+IUserInformation
+IPayloadDefinition
+IConfigurationDefinition
+IClientInitialization
+ConfigurationManager
+ServerConnectionManager
+IConfigurationDefinition
+Square
