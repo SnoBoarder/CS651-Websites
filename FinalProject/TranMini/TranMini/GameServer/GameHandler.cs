@@ -24,11 +24,21 @@ namespace TranMini.GameServer
 			enemyManager = new EnemyManager();
 		}
 
+		bool init = false;
+
 		public void Update(GameTime gameTime)
 		{
+			// make sure to update the squares and enemies before collision manager
 			_squareManager.Update(gameTime);
 			enemyManager.Update(gameTime);
 
+			if (_squareManager.Squares.Count > 0 && !init)
+			{
+				init = true;
+				AddEnemyToGame();
+			}
+
+			// collision manager should only check the enemies against the squares
 			_collisionManager.Update(gameTime);
 		}
 
@@ -41,6 +51,16 @@ namespace TranMini.GameServer
 
 				_squareManager.OrganizeSquares();
 			}
+		}
+
+		private void AddEnemyToGame()
+		{
+			Enemy enemy = new Enemy();
+			enemy.Position.X = 10;
+			enemy.Position.Y = Game.Instance.ScreenConfiguration.SCREEN_HEIGHT - Enemy.HEIGHT;
+
+			enemyManager.Add(enemy);
+			_collisionManager.Monitor(enemy);
 		}
 	}
 }

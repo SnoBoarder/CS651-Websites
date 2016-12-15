@@ -43,6 +43,10 @@ namespace TranMini.GameServer
 							{
 								payload.Squares.Add(Compressor.Compress(((Square)obj)));
 							}
+							else if (obj is Enemy)
+							{
+								payload.Enemies.Add(Compressor.Compress((Enemy)obj));
+							}
 						}
 					}
 					//else // User is Idle, push down "MyShip"

@@ -10,10 +10,10 @@ namespace TranMini.GameServer
 		public GameConfiguration()
 		{
 			// How frequently the Update loop is executed
-			UPDATE_INTERVAL = 20;
+			UPDATE_INTERVAL = 16;//20;
 
 			// How frequently the Draw loop is executed.  Draw is what triggers the client side pings
-			DRAW_INTERVAL = 40;
+			DRAW_INTERVAL = 60;
 
 			// Every X state changes request a ping back
 			REQUEST_PING_EVERY = 5;

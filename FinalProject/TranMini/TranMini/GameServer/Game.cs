@@ -65,8 +65,6 @@ namespace TranMini.GameServer
 
 			_payloadManager = new PayloadManager();
 
-			// RegistraionHandler
-
 			UserHandler = new UserHandler(GameHandler);
 			ConnectionManager = new ConnectionManager(UserHandler, _locker);
 
@@ -86,6 +84,9 @@ namespace TranMini.GameServer
 
 				try
 				{
+					// TODO: Handle state logic here?!
+					// Make it so that at least two people need to be in the game
+
 					//			if ((utcNow - _lastSpawn).TotalSeconds >= 1 && _spawned < AIShipsToSpawn)
 					//			{
 					//				_spawned += SpawnsPerInterval;
@@ -206,8 +207,8 @@ namespace TranMini.GameServer
 					{
 						PayloadContract = _payloadManager.Compressor.PayloadCompressionContract,
 						SquareContract = _payloadManager.Compressor.SquareCompressionContract,
-						CollidableContract = _payloadManager.Compressor.CollidableCompressionContract
-						//BulletContract = _payloadManager.Compressor.BulletCompressionContract,
+						CollidableContract = _payloadManager.Compressor.CollidableCompressionContract,
+						EnemyContract = _payloadManager.Compressor.EnemyCompressionContract,
 					}
 				};
 			}

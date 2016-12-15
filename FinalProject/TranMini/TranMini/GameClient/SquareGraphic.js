@@ -10,7 +10,7 @@ var TranMini;
             this._y = payload.Y;
             this.group = game.add.group();
             var graphics = game.add.graphics(0, 0);
-            graphics.beginFill(0xFFFFFF, 1);
+            graphics.beginFill(payload.UserControlled ? 0xEEEEEE : 0xFFFFFF, 1);
             graphics.drawRect(0, 0, this._width, this._height);
             graphics.endFill();
             var body = game.add.sprite(0, 0, graphics.generateTexture());
@@ -46,12 +46,8 @@ var TranMini;
             tweenA.chain(tweenB);
             tweenA.start();
         };
-        //public Status(text: string, size: number, color: eg.Graphics.Color, fadeDuration?: eg.TimeSpan, reverseDirection?: boolean): void {
-        //    this._statusGraphic.Status(text, size, color, fadeDuration, reverseDirection);
-        //}
         SquareGraphic.prototype.Hide = function () {
             this.group.visible = false;
-            //this.Body.visible = false;
         };
         return SquareGraphic;
     }());

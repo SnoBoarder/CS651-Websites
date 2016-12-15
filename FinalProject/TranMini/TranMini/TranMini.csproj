@@ -169,6 +169,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="GameServer\Collidable.cs" />
     <Compile Include="GameServer\CollisionManager.cs" />
+    <Compile Include="GameServer\Enemy.cs" />
+    <Compile Include="GameServer\PayloadManagement\CompressionContracts\EnemyCompressionContract.cs" />
     <Compile Include="GameServer\PayloadManagement\CompressionContracts\CollidableCompressionContract.cs" />
     <Compile Include="GameServer\PayloadManagement\CompressionContracts\PayloadCompressionContract.cs" />
     <Compile Include="GameServer\PayloadManagement\CompressionContracts\SquareCompressionContract.cs" />
@@ -268,6 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="GameClient\ConfigurationManager.ts" />
+    <TypeScriptCompile Include="GameClient\Enemy.ts" />
+    <TypeScriptCompile Include="GameClient\EnemyGraphic.ts" />
+    <TypeScriptCompile Include="GameClient\EnemyManager.ts" />
     <TypeScriptCompile Include="GameClient\Game.ts" />
     <TypeScriptCompile Include="GameClient\IClientInitialization.ts" />
     <TypeScriptCompile Include="GameClient\IConfigurationDefinitions.ts" />

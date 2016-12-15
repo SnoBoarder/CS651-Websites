@@ -61,8 +61,6 @@ namespace TranMini.GameServer
 			Squares.TryRemove(connectionIDKey, out s);
 		}
 
-		private bool _initialized = false;
-
 		public void Update(GameTime gameTime)
 		{
 			List<string> keysToRemove = new List<string>(Squares.Count);
@@ -78,7 +76,6 @@ namespace TranMini.GameServer
 					// item has been disposed, remove it from the list
 					keysToRemove.Add(currentSquare.Key);
 				}
-
 			});
 
 			for (int i = keysToRemove.Count - 1; i >= 0; i--)

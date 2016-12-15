@@ -10,6 +10,7 @@ namespace TranMini.GameServer
 	{
 		public PayloadCompressionContract PayloadCompressionContract = new PayloadCompressionContract();
 		public SquareCompressionContract SquareCompressionContract = new SquareCompressionContract();
+		public EnemyCompressionContract EnemyCompressionContract = new EnemyCompressionContract();
 		public CollidableCompressionContract CollidableCompressionContract = new CollidableCompressionContract();
 
 		private void SetCollidableContractMembers(object[] result, Collidable obj)
@@ -42,9 +43,20 @@ namespace TranMini.GameServer
 			return result;
 		}
 
+		public object[] Compress(Enemy enemy)
+		{
+			object[] result = new object[8];
+
+			SetCollidableContractMembers(result, enemy);
+
+			result[EnemyCompressionContract.Name] = enemy.Name;
+
+			return result;
+		}
+
 		public object[] Compress(Payload payload)
 		{
-			object[] result = new object[3];
+			object[] result = new object[4];
 			//if (payload.KilledByName != null)
 			//{
 			//	result = new object[14];
@@ -53,6 +65,7 @@ namespace TranMini.GameServer
 			//}
 
 			result[PayloadCompressionContract.Squares] = payload.Squares;
+			result[PayloadCompressionContract.Enemies] = payload.Enemies;
 			result[PayloadCompressionContract.Kills] = payload.Kills;
 			result[PayloadCompressionContract.Deaths] = payload.Deaths;
 

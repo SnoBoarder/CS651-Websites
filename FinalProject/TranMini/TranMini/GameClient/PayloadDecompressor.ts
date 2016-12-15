@@ -13,7 +13,7 @@ module TranMini.Server {
             this.PayloadContract = contracts.PayloadContract;
             this.SquareContract = contracts.SquareContract;
             this.CollidableContract = contracts.CollidableContract;
-            //this.EnemyContract = contracts.EnemyContract;
+            this.EnemyContract = contracts.EnemyContract;
         }
 
         private DecompressCollidable(obj: any[]): ICollidableData {
@@ -31,14 +31,6 @@ module TranMini.Server {
         private DecompressSquare(square: any): ISquareData {
             var result: ISquareData = <ISquareData>this.DecompressCollidable(square);
 
-            //result.MovementController.Position = result.MovementController.Position.Add(Ship.SIZE.Multiply(.5));
-
-            //result.MovementController.Moving = {
-            //    RotatingLeft: !!square[this.SquareContract.RotatingLeft],
-            //    RotatingRight: !!square[this.SquareContract.RotatingRight],
-            //    Forward: !!square[this.SquareContract.Forward],
-            //    Backward: !!square[this.SquareContract.Backward]
-            //};
             result.Jump = square[this.SquareContract.Jump];
             result.UserControlled = square[this.SquareContract.UserControlled];
             result.Name = square[this.SquareContract.Name];
@@ -46,17 +38,18 @@ module TranMini.Server {
             return result;
         }
 
-        //private DecompressBullet(bullet: any): IBulletData {
-        //    var result: IBulletData = <IBulletData>this.DecompressCollidable(bullet);
+        private DecompressEnemy(enemy: any): IEnemyData {
+            var result: IEnemyData = <IEnemyData>this.DecompressCollidable(enemy);
 
-        //    result.DamageDealt = bullet[this.BulletContract.DamageDealt];
+            result.Name = enemy[this.EnemyContract.Name];
 
-        //    return result;
-        //}
+            return result;
+        }
 
         public DecompressPayload(data: any): IPayloadData {
             return {
                 Squares: data[this.PayloadContract.Squares],
+                Enemies: data[this.PayloadContract.Enemies],
                 Kills: data[this.PayloadContract.Kills],
                 Deaths: data[this.PayloadContract.Deaths]
                 //SqauresInWorld: data[this.PayloadContract.SqauresInWorld],
@@ -73,9 +66,9 @@ module TranMini.Server {
                 payload.Squares[i] = this.DecompressSquare(payload.Squares[i]);
             }
 
-            //for (i = 0; i < payload.Bullets.length; i++) {
-            //    payload.Bullets[i] = this.DecompressBullet(payload.Bullets[i]);
-            //}
+            for (i = 0; i < payload.Enemies.length; i++) {
+                payload.Enemies[i] = this.DecompressEnemy(payload.Enemies[i]);
+            }
 
             return payload;
         }

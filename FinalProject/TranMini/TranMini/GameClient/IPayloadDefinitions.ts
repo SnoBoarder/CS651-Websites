@@ -27,13 +27,13 @@
         UserControlled?: boolean;
     }
 
-    export interface IBulletData extends ICollidableData {
-        DamageDealt: number;
+    export interface IEnemyData extends ICollidableData {
+        Name: string;
     }
 
     export interface IPayloadData {
         Squares: Array<ISquareData>;
-        //Bullets: Array<IBulletData>;
+        Enemies: Array<IEnemyData>;
         Kills: number;
         Deaths: number;
         //SquaresInWorld: number;

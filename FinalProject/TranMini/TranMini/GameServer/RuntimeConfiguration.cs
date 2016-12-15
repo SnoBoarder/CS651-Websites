@@ -9,7 +9,7 @@ namespace TranMini.GameServer
 	{
 		public RuntimeConfiguration()
 		{
-			MaxServerUsers = 15;
+			MaxServerUsers = 7;
 		}
 
 		public int MaxServerUsers { get; set; }

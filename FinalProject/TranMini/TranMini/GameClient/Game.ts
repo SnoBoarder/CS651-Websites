@@ -15,6 +15,7 @@ module TranMini {
         private game: Phaser.Game;
 
         private _squareManager: SquareManager;
+        private _enemyManager: EnemyManager;
 
         constructor(serverAdapter: Server.ServerAdapter, initializationData: Server.IClientInitialization) {
 
@@ -25,8 +26,11 @@ module TranMini {
             this._squareManager = new SquareManager(this.game);
             this._squareManager.Initialize(new UserSquareManager(initializationData.SquareID, this._squareManager, serverAdapter));
 
+            this._enemyManager = new EnemyManager(this.game);
+
             serverAdapter.OnPayload.Bind((payload: Server.IPayloadData) => {
                 this._squareManager.LoadPayload(payload);
+                this._enemyManager.LoadPayload(payload);
             });
 
             $("#game").click(()=> {

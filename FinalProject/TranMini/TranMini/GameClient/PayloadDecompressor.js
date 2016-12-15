@@ -9,7 +9,7 @@ var TranMini;
                 this.PayloadContract = contracts.PayloadContract;
                 this.SquareContract = contracts.SquareContract;
                 this.CollidableContract = contracts.CollidableContract;
-                //this.EnemyContract = contracts.EnemyContract;
+                this.EnemyContract = contracts.EnemyContract;
             }
             PayloadDecompressor.prototype.DecompressCollidable = function (obj) {
                 return {
@@ -24,26 +24,20 @@ var TranMini;
             };
             PayloadDecompressor.prototype.DecompressSquare = function (square) {
                 var result = this.DecompressCollidable(square);
-                //result.MovementController.Position = result.MovementController.Position.Add(Ship.SIZE.Multiply(.5));
-                //result.MovementController.Moving = {
-                //    RotatingLeft: !!square[this.SquareContract.RotatingLeft],
-                //    RotatingRight: !!square[this.SquareContract.RotatingRight],
-                //    Forward: !!square[this.SquareContract.Forward],
-                //    Backward: !!square[this.SquareContract.Backward]
-                //};
                 result.Jump = square[this.SquareContract.Jump];
                 result.UserControlled = square[this.SquareContract.UserControlled];
                 result.Name = square[this.SquareContract.Name];
                 return result;
             };
-            //private DecompressBullet(bullet: any): IBulletData {
-            //    var result: IBulletData = <IBulletData>this.DecompressCollidable(bullet);
-            //    result.DamageDealt = bullet[this.BulletContract.DamageDealt];
-            //    return result;
-            //}
+            PayloadDecompressor.prototype.DecompressEnemy = function (enemy) {
+                var result = this.DecompressCollidable(enemy);
+                result.Name = enemy[this.EnemyContract.Name];
+                return result;
+            };
             PayloadDecompressor.prototype.DecompressPayload = function (data) {
                 return {
                     Squares: data[this.PayloadContract.Squares],
+                    Enemies: data[this.PayloadContract.Enemies],
                     Kills: data[this.PayloadContract.Kills],
                     Deaths: data[this.PayloadContract.Deaths]
                 };
@@ -54,9 +48,9 @@ var TranMini;
                 for (i = 0; i < payload.Squares.length; i++) {
                     payload.Squares[i] = this.DecompressSquare(payload.Squares[i]);
                 }
-                //for (i = 0; i < payload.Bullets.length; i++) {
-                //    payload.Bullets[i] = this.DecompressBullet(payload.Bullets[i]);
-                //}
+                for (i = 0; i < payload.Enemies.length; i++) {
+                    payload.Enemies[i] = this.DecompressEnemy(payload.Enemies[i]);
+                }
                 return payload;
             };
             return PayloadDecompressor;

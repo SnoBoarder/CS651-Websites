@@ -50,6 +50,9 @@ namespace TranMini
 				.Include("~/GameClient/SquareGraphic.js")
 				.Include("~/GameClient/UserSquareManager.js")
 				.Include("~/GameClient/SquareManager.js")
+				.Include("~/GameClient/Enemy.js")
+				.Include("~/GameClient/EnemyGraphic.js")
+				.Include("~/GameClient/EnemyManager.js")
 				.Include("~/GameClient/Game.js")
 				.Include("~/GameClient/ConfigurationManager.js")
 				.Include("~/GameClient/Main.js"));

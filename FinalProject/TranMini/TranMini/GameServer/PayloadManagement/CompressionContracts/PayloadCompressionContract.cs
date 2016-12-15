@@ -8,7 +8,8 @@ namespace TranMini.GameServer.CompressionContracts
 	public class PayloadCompressionContract
 	{
 		public short Squares = 0;
-		public short Kills = 1;
-		public short Deaths = 2;
+		public short Enemies = 1;
+		public short Kills = 2;
+		public short Deaths = 3;
 	}
 }

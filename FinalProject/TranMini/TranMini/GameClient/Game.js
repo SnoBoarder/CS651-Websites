@@ -15,8 +15,10 @@ var TranMini;
             Game.GameConfiguration = new TranMini.ConfigurationManager(initializationData.Configuration);
             this._squareManager = new TranMini.SquareManager(this.game);
             this._squareManager.Initialize(new TranMini.UserSquareManager(initializationData.SquareID, this._squareManager, serverAdapter));
+            this._enemyManager = new TranMini.EnemyManager(this.game);
             serverAdapter.OnPayload.Bind(function (payload) {
                 _this._squareManager.LoadPayload(payload);
+                _this._enemyManager.LoadPayload(payload);
             });
             $("#game").click(function () {
                 _this._squareManager.Jump();
