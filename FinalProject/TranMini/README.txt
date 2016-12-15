@@ -35,4 +35,9 @@ ServerConnectionManager
 IConfigurationDefinition
 Square
 
-organize squares
+TODO:
+- Have a counter above each player representing successful jumps over the box.
+	- Put it in the square class and not have the Y be affected!
+- Make enemy smoother
+	- Let the enemy bounce on the bottom
+- get sprite assets :D
