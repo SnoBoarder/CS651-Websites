@@ -169,6 +169,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="GameServer\Collidable.cs" />
     <Compile Include="GameServer\CollisionManager.cs" />
+    <Compile Include="GameServer\PayloadManagement\CompressionContracts\CollidableCompressionContract.cs" />
     <Compile Include="GameServer\PayloadManagement\CompressionContracts\PayloadCompressionContract.cs" />
     <Compile Include="GameServer\PayloadManagement\CompressionContracts\SquareCompressionContract.cs" />
     <Compile Include="GameServer\ConnectionManager.cs" />

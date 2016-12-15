@@ -39,7 +39,7 @@ namespace TranMini.GameServer
 		//public DamageController DamageController { get; set; }
 		public bool Disposed { get; set; }
 		public int ID { get; set; }
-		//public bool Collided { get; set; }
+		public bool Collided { get; set; }
 		//public Vector2 CollidedAt { get; set; }
 		public DateTime LastUpdated { get; set; }
 		protected int _width { get; set; }

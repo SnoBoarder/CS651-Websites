@@ -11,21 +11,25 @@ module TranMini {
 
             var graphics = game.add.graphics(0, 0);
 
-            graphics.beginFill(0xFF00FF, 1);
-            graphics.drawRect(0, 0, 100, 100);
-            graphics.endFill();
-
             if (userControlled) {
                 graphics.beginFill(0xFFFFFF, 1);
-                graphics.moveTo(50, 110);
-                graphics.lineTo(75, 130);
-                graphics.lineTo(25, 130);
-                graphics.lineTo(50, 110);
+                graphics.moveTo(25, 0);
+                graphics.lineTo(75, 0);
+                graphics.lineTo(50, 20);
+                graphics.lineTo(25, 0);
                 graphics.endFill();
             }
 
+            graphics.beginFill(0xFFFFFF, 1);
+            graphics.drawRect(0, 30, 100, 100);
+            graphics.endFill();
+
             var body = game.add.sprite(0, 0, graphics.generateTexture());
-            var text = game.add.text(0, 0, "test", {});
+
+            var style = { font: "bold 14px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+            var text = game.add.text(0, 0, name, style);
+            text.setTextBounds(0, 30, 100, 100);
 
             this.group.add(body);
             this.group.add(text);

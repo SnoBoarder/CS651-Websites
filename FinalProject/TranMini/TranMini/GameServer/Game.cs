@@ -203,8 +203,8 @@ namespace TranMini.GameServer
 					CompressionContracts = new
 					{
 						PayloadContract = _payloadManager.Compressor.PayloadCompressionContract,
-						SquareContract = _payloadManager.Compressor.SquareCompressionContract
-						//CollidableContract = _payloadManager.Compressor.CollidableCompressionContract,
+						SquareContract = _payloadManager.Compressor.SquareCompressionContract,
+						CollidableContract = _payloadManager.Compressor.CollidableCompressionContract
 						//BulletContract = _payloadManager.Compressor.BulletCompressionContract,
 					}
 				};

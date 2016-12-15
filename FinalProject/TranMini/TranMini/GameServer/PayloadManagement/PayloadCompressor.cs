@@ -10,12 +10,23 @@ namespace TranMini.GameServer
 	{
 		public PayloadCompressionContract PayloadCompressionContract = new PayloadCompressionContract();
 		public SquareCompressionContract SquareCompressionContract = new SquareCompressionContract();
+		public CollidableCompressionContract CollidableCompressionContract = new CollidableCompressionContract();
+
+		private void SetCollidableContractMembers(object[] result, Collidable obj)
+		{
+			result[CollidableCompressionContract.Collided] = Convert.ToInt32(obj.Collided);
+			result[CollidableCompressionContract.ID] = obj.ID;
+			result[CollidableCompressionContract.Disposed] = Convert.ToInt32(obj.Disposed);
+		}
 
 		public object[] Compress(Square square)
 		{
-			object[] result = new object[1];
+			object[] result = new object[5];
+
+			SetCollidableContractMembers(result, square);
 
 			result[SquareCompressionContract.Jump] = 0;
+			result[SquareCompressionContract.Name] = square.Name;
 
 			return result;
 		}

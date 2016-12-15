@@ -68,7 +68,7 @@ module TranMini {
         //}
 
         private Invoke(method: string, pingBack: boolean, command: ISquareCommand): void {
-            var ship: Square = this._squareManager.GetSquare(this.ControlledSquareId);
+            var square: Square = this._squareManager.GetSquare(this.ControlledSquareId);
 
             //this._proxy.invoke(method, command.Command, { X: Math.round(ship.MovementController.Position.X - ship.Graphic.Size.HalfWidth), Y: Math.round(ship.MovementController.Position.Y - ship.Graphic.Size.HalfHeight) }, Math.roundTo(ship.MovementController.Rotation * 57.2957795, 2), { X: Math.round(ship.MovementController.Velocity.X), Y: Math.round(ship.MovementController.Velocity.Y) }, pingBack);
         }
