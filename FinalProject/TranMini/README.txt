@@ -1,11 +1,15 @@
-How to run project:
-- Open "TranMini.sln"
-- Run the project, which will setup a virtual IIS Express service.
-- Enjoy!
+Tran Mini Game CS651 Final Project 
 
-Online example:
-- http://tranmini.azurewebsites.net/Home/Game
-- NOTE: If it's not running, please notify me and I will fix it: btran89@bu.edu
+Prerequisites:
+- Visual Studio 2015 with Update 3
+- .NET Core 1.0.1 tools Preview 2
+	- Should be safe without this since the project was built in .NET 4.6
+
+How to run the project:
+- Open "TranMini.sln"
+- Nuget packages should restore properly, if not the packages that were installed are listed below.
+- Run the project
+- Enjoy!
 
 If you're missing packages:
 	The following packages need to be installed through Package Manager Console:
@@ -41,6 +45,10 @@ If you're missing packages:
 	signalr.TypeScript.DefinitelyTyped                 {0.4.1}      TranMini   
 	WebGrease                                          {1.5.2}      TranMini   
 
+Online example:
+- http://tranmini.azurewebsites.net/Home/Game
+- NOTE: If it's not running, please notify me and I will fix it: btran89@bu.edu
+
 Hiccups:
 - BundleConfig
 	- The BundleConfig needs to be setup to compile all typescript files properly
@@ -52,4 +60,3 @@ Hiccups:
 - Negotiation
 - HighFrequencyTimer
 - GameTime
-https://github.com/NTaylorMullen/ShootR/tree/master/ShootR
