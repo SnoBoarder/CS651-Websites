@@ -36,3 +36,4 @@ var TranMini;
     }());
     TranMini.Game = Game;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=Game.js.map

@@ -30,3 +30,4 @@ var TranMini;
         Server.ServerConnectionManager = ServerConnectionManager;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=ServerConnectionManager.js.map

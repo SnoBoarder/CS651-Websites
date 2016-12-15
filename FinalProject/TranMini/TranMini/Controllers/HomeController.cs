@@ -15,25 +15,6 @@ namespace TranMini.Controllers
 
 		public ActionResult Index()
 		{
-			return View();
-		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
-		}
-
-		public ActionResult Game()
-		{
 			RegisteredClient rc = new RegisteredClient();
 
 			rc.RegistrationID = null;
@@ -44,6 +25,16 @@ namespace TranMini.Controllers
 
 			TranMiniAuthenticationProvider.SetState(rc, Response);
 
+			return View();
+		}
+
+		public ActionResult About()
+		{
+			return View();
+		}
+
+		public ActionResult Contact()
+		{
 			return View();
 		}
 	}

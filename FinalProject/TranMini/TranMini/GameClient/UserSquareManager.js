@@ -70,3 +70,4 @@ var TranMini;
     }());
     TranMini.UserSquareManager = UserSquareManager;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=UserSquareManager.js.map

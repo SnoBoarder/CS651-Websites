@@ -14,7 +14,7 @@ namespace TranMini.GameServer
 		public const int HEIGHT = WIDTH;
 		public const int JUMP_DURATION = 500;
 
-		public const int IDLE_FAIL_COUNT = 10;
+		public const int IDLE_FAIL_COUNT = 100;
 
 		private static int _squareGUID = 0;
 
