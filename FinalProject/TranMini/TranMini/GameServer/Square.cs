@@ -38,9 +38,6 @@ namespace TranMini.GameServer
 		{
 			ID = Interlocked.Increment(ref _squareGUID);
 			Name = NAME_PREFIX + ID;
-
-			// handle death handler
-			//OnDeath += new DeathEventHandler((sender, e) => StatRecorder.ShipDeath(sender, e));
 		}
 
 		public override void HandleCollisionWith(Collidable c)

@@ -12,8 +12,6 @@ namespace TranMini.GameServer
 	{
 		private GameHandler _gameHandler;
 
-		//private RespawnManager _respawnManager;
-
 		public ConcurrentDictionary<string, Square> Squares { get; set; }
 
 		public SquareManager(GameHandler gameHandler)

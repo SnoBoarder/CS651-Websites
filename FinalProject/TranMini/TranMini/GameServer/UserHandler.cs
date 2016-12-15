@@ -63,14 +63,6 @@ namespace TranMini.GameServer
 		{
 			_userList.TryAdd(user.ConnectionID, user);
 			user.OnIdle += DisconnectUser;
-			//user.IdleManager.OnIdle += _gameHandler.RemoveShipFromGame;
-			//user.IdleManager.OnIdleTimeout += DisconnectUser;
-			//user.IdleManager.OnComeBack += _gameHandler.AddShipToGame;
-
-			//if (!user.Controller)
-			//{
-			//	user.MyShip.OnFire += _gameHandler.AddBulletToGame;
-			//}
 		}
 
 		public User GetUser(string connectionId)
@@ -94,17 +86,6 @@ namespace TranMini.GameServer
 		{
 			return _userList.Values.ToList();
 		}
-
-		//public List<User> GetActiveUsers()
-		//{
-		//	List<User> activeUsers = (from user in _userList.Values
-		//							  where !user.Controller && user.Connected && !user.IdleManager.Idle
-		//							  select user).ToList();
-
-		//	TotalActiveUsers = activeUsers.Count;
-
-		//	return activeUsers;
-		//}
 
 		public ICollection<string> GetUserConnectionIds()
 		{

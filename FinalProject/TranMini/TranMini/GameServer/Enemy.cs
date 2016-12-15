@@ -26,7 +26,7 @@ namespace TranMini.GameServer
 
 		public Enemy() : base(WIDTH, HEIGHT)
 		{
-			ID = Interlocked.Increment(ref _enemyGUID);// Reverse bullet GUID's to go below 0
+			ID = Interlocked.Increment(ref _enemyGUID);
 			Name = NAME_PREFIX + ID;
 
 			Speed = SPEED;
@@ -36,7 +36,7 @@ namespace TranMini.GameServer
 		{
 			base.Update();
 
-			Position.X+= Speed;
+			Position.X += Speed;
 
 			SetPosition(Convert.ToInt32(Position.X), Convert.ToInt32(Position.Y));
 			if (Position.X + Width > Game.Instance.ScreenConfiguration.SCREEN_WIDTH || Position.X < 0)

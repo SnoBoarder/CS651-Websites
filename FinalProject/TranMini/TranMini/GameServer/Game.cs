@@ -84,21 +84,9 @@ namespace TranMini.GameServer
 
 				try
 				{
-					// TODO: Handle state logic here?!
-					// Make it so that at least two people need to be in the game
-
-					//			if ((utcNow - _lastSpawn).TotalSeconds >= 1 && _spawned < AIShipsToSpawn)
-					//			{
-					//				_spawned += SpawnsPerInterval;
-					//				SpawnAIShips(SpawnsPerInterval);
-					//				_lastSpawn = utcNow;
-					//			}
-
 					_gameTime.Update(utcNow);
 
 					GameHandler.Update(_gameTime);
-
-					//			_space.Update();
 
 					if (_actualFPS <= _drawFPS || (++_drawCount) % DRAW_AFTER == 0)
 					{
@@ -108,7 +96,7 @@ namespace TranMini.GameServer
 				}
 				catch (Exception e)
 				{
-					//			ErrorLog.Instance.Log(e);
+					// ErrorLog.Instance.Log(e);
 				}
 
 				return id;
@@ -120,7 +108,6 @@ namespace TranMini.GameServer
 		/// </summary>
 		private void Draw()
 		{
-			//_world.CheckIncreaseMapSize(UserHandler.TotalActiveUsers);
 			UserHandler.Update();
 
 			ConcurrentDictionary<string, object[]> payloads = _payloadManager.GetGamePayloads(UserHandler.GetUsers(), UserHandler.TotalActiveUsers, _world);
@@ -181,7 +168,6 @@ namespace TranMini.GameServer
 						{
 							// user already logged in
 							GetContext().Clients.Client(previousConnectionID).controlTransferred();
-							//user.NotificationManager.Notify("Transfering control to this browser.  You were already logged in.");
 						}
 						else
 						{
@@ -189,9 +175,6 @@ namespace TranMini.GameServer
 							square.Disposed = false;
 							user.Connected = true;
 						}
-
-						//user.IdleManager.RecordActivity();
-						//user.IdleManager.Idle = false;
 					}
 
 					GameHandler.AddSquareToGame(square);
@@ -242,8 +225,6 @@ namespace TranMini.GameServer
 
 					UserHandler.AddUser(controllerUser);
 					main.RemoteControllers.Add(controllerUser);
-
-					//main.NotificationManager.Notify("Controller attached.");
 
 					return new
 					{

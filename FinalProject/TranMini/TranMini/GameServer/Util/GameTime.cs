@@ -15,6 +15,7 @@ namespace TranMini.GameServer.Util
 
 		public static DateTime LastUpdated { get; set; }
 		public static DateTime Now { get; set; }
+
 		/// <summary>
 		/// This is updated on Update to show what percent of a second has passed since the last Update loop.
 		/// </summary>

@@ -22,11 +22,6 @@ namespace TranMini.Authentication
 			var state = JsonConvert.SerializeObject(temp);
 
 			response.Cookies.Add(new HttpCookie("tranmini.state", state));
-
-			//response.Cookies.Add("tranmini.state", state, new CookieOptions
-			//{
-			//	Expires = DateTime.Now.AddDays(30)
-			//});
 		}
 	}
 }

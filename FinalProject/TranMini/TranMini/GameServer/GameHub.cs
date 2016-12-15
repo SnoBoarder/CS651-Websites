@@ -123,21 +123,6 @@ namespace TranMini.GameServer
 			}
 		}
 
-		//public void changeViewport(int viewportWidth, int viewportHeight)
-		//{
-		//	try
-		//	{
-		//		if (_game.UserHandler.UserExistsAndReady(Context.ConnectionId))
-		//		{
-		//			_game.UserHandler.GetUser(Context.ConnectionId).Viewport = new Size(viewportWidth, viewportHeight);
-		//		}
-		//	}
-		//	catch (Exception e)
-		//	{
-		//		ErrorLog.Instance.Log(e);
-		//	}
-		//}
-
 		#endregion
 	}
 }

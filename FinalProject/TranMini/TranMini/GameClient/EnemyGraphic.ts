@@ -36,11 +36,6 @@ module TranMini {
             }
         }
 
-        private MoveSquare(x: number) {
-            // TODO: Consider animating
-            this._body.x = x;
-        }
-
         public Hide(): void {
             this._body.visible = false;
         }

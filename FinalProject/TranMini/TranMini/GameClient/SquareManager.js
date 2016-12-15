@@ -36,6 +36,7 @@ var TranMini;
                 }
             }
         };
+        // dispatch jump message for the user
         SquareManager.prototype.Jump = function () {
             this.UserSquareManager.Jump();
         };
@@ -43,3 +44,4 @@ var TranMini;
     }());
     TranMini.SquareManager = SquareManager;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=SquareManager.js.map

@@ -31,9 +31,5 @@
 
     export interface IConfigurationManager {
         gameConfig: IGameConfiguration;
-        //squareConfig: ISquareConfiguration;
-        //mapConfig: IMapConfiguration;
-        //screenConfig: IScreenConfiguration;
-        //enemyConfig: IEnemyConfiguration;
     }
 }

@@ -181,7 +181,6 @@
     <Compile Include="GameServer\GameConfigurationManager.cs" />
     <Compile Include="GameServer\GameHandler.cs" />
     <Compile Include="GameServer\PayloadManagement\Payload.cs" />
-    <Compile Include="GameServer\PayloadManagement\PayloadCache.cs" />
     <Compile Include="GameServer\PayloadManagement\PayloadCompressor.cs" />
     <Compile Include="GameServer\PayloadManagement\PayloadManager.cs" />
     <Compile Include="GameServer\RegisteredClient.cs" />

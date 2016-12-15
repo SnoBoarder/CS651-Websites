@@ -22,10 +22,6 @@ var TranMini;
                 this._body.x = payload.X;
             }
         };
-        EnemyGraphic.prototype.MoveSquare = function (x) {
-            // TODO: Consider animating
-            this._body.x = x;
-        };
         EnemyGraphic.prototype.Hide = function () {
             this._body.visible = false;
         };
@@ -33,3 +29,4 @@ var TranMini;
     }());
     TranMini.EnemyGraphic = EnemyGraphic;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=EnemyGraphic.js.map

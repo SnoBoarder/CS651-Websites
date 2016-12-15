@@ -16,7 +16,8 @@ namespace TranMini.GameServer
 			_objects = new List<Collidable>();
 		}
 
-		public List<Collidable> objects {
+		public List<Collidable> objects
+		{
 			get
 			{
 				return _objects;

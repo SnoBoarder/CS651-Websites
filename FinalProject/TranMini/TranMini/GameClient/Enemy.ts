@@ -29,11 +29,6 @@ module TranMini {
         public OnExplosion: eg.EventHandler;
 
         public Update(gameTime: eg.GameTime): void {
-
-            // Bullets been alive too long
-            //if ((new Date().getTime() - this._spawnedAt) >= Bullet.BULLET_DIE_AFTER.Milliseconds) {
-            //    this.Destroy(false);
-            //}
         }
 
         public LoadPayload(payload: Server.IEnemyData): void {
@@ -43,21 +38,10 @@ module TranMini {
             this.Graphic.LoadPayload(payload);
         }
 
-        public Destroy(explode: boolean = true): void {
+        public Destroy(): void {
             if (!this._destroyed) {
                 this._destroyed = true;
-
-                //this.MovementController.Dispose();
-
-                if (!explode) {
-                    //this.Graphic.Dispose();
-                    //this.Dispose();
-                } else {
-                    // We rely on the completion of the explosion to finish disposing the bounds and graphic
-                    this.OnExplosion.Trigger();
-                }
             }
         }
     }
-
 }

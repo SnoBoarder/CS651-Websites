@@ -8,7 +8,6 @@ var TranMini;
     (function (Server) {
         var ServerAdapter = (function () {
             function ServerAdapter(Connection, Proxy, authCookieName) {
-                //var savedProxyInvoke = this.Proxy.invoke;
                 var _this = this;
                 this.Connection = Connection;
                 this.Proxy = Proxy;
@@ -17,11 +16,6 @@ var TranMini;
                 this.OnControlTransferred = new eg.EventHandler();
                 this.OnPingRequest = new eg.EventHandler();
                 this._connectionManager = new Server.ServerConnectionManager(authCookieName);
-                //(<any>this.Proxy.invoke) = () => {
-                //    if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
-                //        return savedProxyInvoke.apply(this.Proxy, arguments);
-                //    }
-                //};
                 this.OnForcedDisconnect.Bind(function () {
                     // You have been disconnected for being Idle too long.  Refresh the page to play again.
                     _this.Stop();
@@ -55,6 +49,7 @@ var TranMini;
                 this.Connection.stop();
             };
             ServerAdapter.prototype.TryInitialize = function (userInformation, onComplete, count) {
+                var _this = this;
                 if (count === void 0) { count = 0; }
                 this.Proxy.invoke("initializeClient", userInformation.RegistrationID).done(function (initialization) {
                     if (!initialization) {
@@ -63,6 +58,9 @@ var TranMini;
                             window.location.reload();
                         }
                         else {
+                            setTimeout(function () {
+                                _this.TryInitialize(userInformation, onComplete, count + 1);
+                            }, ServerAdapter.RETRY_DELAY.Milliseconds);
                         }
                     }
                     else {
@@ -84,13 +82,12 @@ var TranMini;
                 this.Proxy.on("pingBack", function () {
                     _this.OnPingRequest.Trigger();
                 });
-                this.Proxy.on("chatMessage", function (from, message, type) {
-                    //this.OnMessageReceived.Trigger(new ShootR.ChatMessage(from, message, type));
-                });
             };
             ServerAdapter.NEGOTIATE_RETRIES = 3;
+            ServerAdapter.RETRY_DELAY = eg.TimeSpan.FromSeconds(1);
             return ServerAdapter;
         }());
         Server.ServerAdapter = ServerAdapter;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=ServerAdapter.js.map

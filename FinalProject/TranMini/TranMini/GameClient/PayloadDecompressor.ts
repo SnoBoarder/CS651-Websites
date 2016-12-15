@@ -55,9 +55,6 @@ module TranMini.Server {
                 Enemies: data[this.PayloadContract.Enemies],
                 Kills: data[this.PayloadContract.Kills],
                 Deaths: data[this.PayloadContract.Deaths]
-                //SqauresInWorld: data[this.PayloadContract.SqauresInWorld],
-                //EnemiesInWorld: data[this.PayloadContract.EnemiesInWorld],
-                //LastCommandProcessed: data[this.PayloadContract.LastCommandProcessed]
             };
         }
 

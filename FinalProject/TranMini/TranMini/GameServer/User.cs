@@ -14,7 +14,6 @@ namespace TranMini.GameServer
 		public bool Connected { get; set; }
 		public RegisteredClient RegistrationTicket { get; set; }
 		public List<User> RemoteControllers { get; set; }
-		//public IdleManager IdleManager { get; private set; }
 		public string ConnectionID { get; set; }
 		public Square MySquare { get; set; }
 		public bool Controller { get; set; }
@@ -36,9 +35,7 @@ namespace TranMini.GameServer
 			MySquare.OnSuperFail += OnSuperFail;
 
 			ReadyForPayloads = false;
-			//Viewport = new Size(0, 0); // Initialize the viewport to 0 by 0
 			RemoteControllers = new List<User>();
-			//IdleManager = new IdleManager(square, NotificationManager);
 			Connected = true;
 
 			if (square != null)
@@ -57,34 +54,8 @@ namespace TranMini.GameServer
 			context.Clients.Client(ConnectionID).d(payload);
 		}
 
-		//private Size _viewport;
-		//public Size Viewport
-		//{
-		//	get
-		//	{
-		//		return _viewport;
-		//	}
-		//	set
-		//	{
-		//		if (value.Width > MAX_SCREEN_WIDTH)
-		//		{
-		//			value.Width = MAX_SCREEN_WIDTH;
-		//		}
-		//		if (value.Height > MAX_SCREEN_HEIGHT)
-		//		{
-		//			value.Height = MAX_SCREEN_HEIGHT;
-		//		}
-
-		//		_viewport = value;
-		//	}
-		//}
-
 		public void Update()
 		{
-			if (MySquare != null)
-			{
-				//IdleManager.Update();
-			}
 		}
 	}
 }

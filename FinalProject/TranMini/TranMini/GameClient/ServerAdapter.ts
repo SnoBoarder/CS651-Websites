@@ -6,33 +6,23 @@
 module TranMini.Server {
     export class ServerAdapter {
         public static NEGOTIATE_RETRIES: number = 3;
-        //public static RETRY_DELAY: eg.TimeSpan = eg.TimeSpan.FromSeconds(1);
+        public static RETRY_DELAY: eg.TimeSpan = eg.TimeSpan.FromSeconds(1);
 
         public OnPayload: eg.EventHandler1<IPayloadData>;
         public OnForcedDisconnect: eg.EventHandler;
         public OnControlTransferred: eg.EventHandler;
         public OnPingRequest: eg.EventHandler;
-        //public OnMessageReceived: EventHandler1<ShootR.ChatMessage>;
 
         private _payloadDecompressor: PayloadDecompressor;
         private _connectionManager: ServerConnectionManager;
 
         constructor(public Connection: SignalR.Hub.Connection, public Proxy: SignalR.Hub.Proxy, authCookieName: string) {
-
-            //var savedProxyInvoke = this.Proxy.invoke;
-
             this.OnPayload = new eg.EventHandler1<IPayloadData>();
             this.OnForcedDisconnect = new eg.EventHandler();
             this.OnControlTransferred = new eg.EventHandler();
             this.OnPingRequest = new eg.EventHandler();
 
             this._connectionManager = new ServerConnectionManager(authCookieName);
-
-            //(<any>this.Proxy.invoke) = () => {
-            //    if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
-            //        return savedProxyInvoke.apply(this.Proxy, arguments);
-            //    }
-            //};
 
             this.OnForcedDisconnect.Bind(() => {
                 // You have been disconnected for being Idle too long.  Refresh the page to play again.
@@ -82,9 +72,9 @@ module TranMini.Server {
                         console.log("Could not negotiate with server, refreshing the page.");
                         window.location.reload();
                     } else {
-                        //setTimeout(() => {
-                        //    this.TryInitialize(userInformation, onComplete, count + 1);
-                        //}, ServerAdapter.RETRY_DELAY.Milliseconds);
+                        setTimeout(() => {
+                            this.TryInitialize(userInformation, onComplete, count + 1);
+                        }, ServerAdapter.RETRY_DELAY.Milliseconds);
                     }
                 } else {
                     onComplete(initialization);
@@ -107,10 +97,6 @@ module TranMini.Server {
 
             this.Proxy.on("pingBack", () => {
                 this.OnPingRequest.Trigger();
-            });
-
-            this.Proxy.on("chatMessage", (from: string, message: string, type: number) => {
-                //this.OnMessageReceived.Trigger(new ShootR.ChatMessage(from, message, type));
             });
         }
     }

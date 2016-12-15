@@ -22,7 +22,11 @@ Hiccups:
 - TypeScript
 	- Syntax!
 - Manipulated "jumping" data before it was sent out to everyone!
-
+- Authentication cookie
+- Registration
+- Negotiation
+- HighFrequencyTimer
+- GameTime
 
 PayloadDecompressor
 ServerConnectionManager

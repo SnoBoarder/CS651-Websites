@@ -48,6 +48,7 @@ module TranMini {
             }
         }
 
+        // dispatch jump message for the user
         public Jump(): void {
             this.UserSquareManager.Jump();
         }

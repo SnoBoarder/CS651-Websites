@@ -28,11 +28,13 @@ module TranMini {
 
             this._enemyManager = new EnemyManager(this.game);
 
+            // handles all payloads
             serverAdapter.OnPayload.Bind((payload: Server.IPayloadData) => {
                 this._squareManager.LoadPayload(payload);
                 this._enemyManager.LoadPayload(payload);
             });
 
+            // input handler
             $("#game").click(()=> {
                 this._squareManager.Jump();
             });

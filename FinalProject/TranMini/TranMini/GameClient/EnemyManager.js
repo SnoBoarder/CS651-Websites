@@ -23,3 +23,4 @@ var TranMini;
     }());
     TranMini.EnemyManager = EnemyManager;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=EnemyManager.js.map

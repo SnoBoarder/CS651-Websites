@@ -103,3 +103,4 @@ var TranMini;
     }());
     TranMini.SquareGraphic = SquareGraphic;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=SquareGraphic.js.map

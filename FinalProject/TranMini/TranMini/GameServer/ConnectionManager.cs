@@ -56,16 +56,13 @@ namespace TranMini.GameServer
 							if (user.MySquare != null)
 							{
 								user.MySquare.Host.RemoteControllers.Remove(user);
-								//user.MySquare.Host.NotificationManager.Notify("Detached controller.");
 								user.MySquare = null;
 							}
 
 							_userHandler.RemoveUser(connectionId);
 						}
 
-						// Leave the leaderboard group just in case user was in it
 						IHubContext context = Game.GetContext();
-						//context.Groups.Remove(connectionId, Leaderboard.LEADERBOARD_REQUESTEE_GROUP);
 
 						// Clear controllers
 						foreach (User u in user.RemoteControllers)

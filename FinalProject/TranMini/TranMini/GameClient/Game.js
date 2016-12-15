@@ -16,10 +16,12 @@ var TranMini;
             this._squareManager = new TranMini.SquareManager(this.game);
             this._squareManager.Initialize(new TranMini.UserSquareManager(initializationData.SquareID, this._squareManager, serverAdapter));
             this._enemyManager = new TranMini.EnemyManager(this.game);
+            // handles all payloads
             serverAdapter.OnPayload.Bind(function (payload) {
                 _this._squareManager.LoadPayload(payload);
                 _this._enemyManager.LoadPayload(payload);
             });
+            // input handler
             $("#game").click(function () {
                 _this._squareManager.Jump();
             });
@@ -36,3 +38,4 @@ var TranMini;
     }());
     TranMini.Game = Game;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=Game.js.map
