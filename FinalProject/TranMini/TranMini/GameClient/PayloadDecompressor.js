@@ -27,6 +27,7 @@ var TranMini;
                 //    Forward: !!square[this.SquareContract.Forward],
                 //    Backward: !!square[this.SquareContract.Backward]
                 //};
+                result.Jump = square[this.SquareContract.Jump];
                 result.UserControlled = square[this.SquareContract.UserControlled];
                 result.Name = square[this.SquareContract.Name];
                 return result;

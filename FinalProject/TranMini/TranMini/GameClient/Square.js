@@ -23,6 +23,9 @@ var TranMini;
         //}
         Square.prototype.LoadPayload = function (payload) {
             this.ID = payload.ID;
+            if (payload.Jump > 0) {
+                this.Graphic.Jump(payload.Jump);
+            }
         };
         Square.prototype.Destroy = function () {
             if (!this._destroyed) {

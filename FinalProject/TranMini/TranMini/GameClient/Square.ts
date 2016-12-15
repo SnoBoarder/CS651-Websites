@@ -44,6 +44,10 @@ module TranMini {
 
         public LoadPayload(payload: Server.ISquareData): void {
             this.ID = payload.ID;
+
+            if (payload.Jump > 0) {
+                this.Graphic.Jump(payload.Jump);
+            }
         }
 
         public Destroy(): void {

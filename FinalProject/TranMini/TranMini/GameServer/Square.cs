@@ -12,6 +12,7 @@ namespace TranMini.GameServer
 		public const string NAME_PREFIX = "Square";
 		public const int WIDTH = 10;
 		public const int HEIGHT = WIDTH;
+		public const int JUMP_DURATION = 750;
 
 		private static int _squareGUID = 0;
 
@@ -22,6 +23,9 @@ namespace TranMini.GameServer
 		public string Name { get; set; }
 		public User Host { get; set; }
 
+		public int JumpDuration { get; set; }
+		public DateTime? JumpedAt { get; private set; }
+
 		public Square() : base(WIDTH, HEIGHT)
 		{
 			ID = Interlocked.Increment(ref _squareGUID);
@@ -30,12 +34,25 @@ namespace TranMini.GameServer
 			//OnDeath += new DeathEventHandler((sender, e) => StatRecorder.ShipDeath(sender, e));
 
 			//_enqueuedCommands = new ConcurrentQueue<Action>();
+		}
 
+		public void Jump()
+		{
+			if (!JumpedAt.HasValue)
+			{
+				JumpedAt = GameTime.Now;
+				JumpDuration = JUMP_DURATION;
+			}
 		}
 
 		public virtual void Update(GameTime gameTime)
 		{
 			base.Update();
+
+			if (JumpedAt.HasValue && (GameTime.Now - JumpedAt) >= TimeSpan.FromMilliseconds(JUMP_DURATION))
+			{
+				JumpedAt = null;
+			}
 
 			//	Action command;
 

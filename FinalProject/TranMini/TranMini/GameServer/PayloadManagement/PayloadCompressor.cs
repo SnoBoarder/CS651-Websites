@@ -25,7 +25,14 @@ namespace TranMini.GameServer
 
 			SetCollidableContractMembers(result, square);
 
-			result[SquareCompressionContract.Jump] = 0;
+			int jumpDuration = 0;
+			if (square.JumpDuration > 0)
+			{
+				jumpDuration = square.JumpDuration;
+				square.JumpDuration = 0;
+			}
+
+			result[SquareCompressionContract.Jump] = jumpDuration;
 			result[SquareCompressionContract.Name] = square.Name;
 
 			return result;

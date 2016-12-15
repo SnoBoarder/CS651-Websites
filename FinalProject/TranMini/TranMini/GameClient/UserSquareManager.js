@@ -50,8 +50,12 @@ var TranMini;
         //        this._userCameraController.Update(gameTime);
         //    }
         //}
-        UserSquareManager.prototype.Invoke = function (method, pingBack, command) {
+        UserSquareManager.prototype.Jump = function () {
+            this.Invoke("registerJump", this.LatencyResolver.TryRequestPing());
+        };
+        UserSquareManager.prototype.Invoke = function (method, pingBack) {
             var square = this._squareManager.GetSquare(this.ControlledSquareId);
+            this._proxy.invoke(method, pingBack);
             //this._proxy.invoke(method, command.Command, { X: Math.round(ship.MovementController.Position.X - ship.Graphic.Size.HalfWidth), Y: Math.round(ship.MovementController.Position.Y - ship.Graphic.Size.HalfHeight) }, Math.roundTo(ship.MovementController.Rotation * 57.2957795, 2), { X: Math.round(ship.MovementController.Velocity.X), Y: Math.round(ship.MovementController.Velocity.Y) }, pingBack);
         };
         UserSquareManager.prototype.NewMovementCommand = function (direction, startMoving) {

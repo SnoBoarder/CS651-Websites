@@ -59,6 +59,10 @@ module TranMini {
             //this.UserShipManager.LoadPayload(payload);
         }
 
+        public Jump(): void {
+            this.UserSquareManager.Jump();
+        }
+
         //public Update(gameTime: eg.GameTime): void {
         //    // Update positions first
         //    for (var id in this._ships) {

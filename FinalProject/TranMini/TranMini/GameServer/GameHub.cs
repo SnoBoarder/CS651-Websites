@@ -76,10 +76,10 @@ namespace TranMini.GameServer
 		/// <returns>The game's configuration</returns>
 		public object initializeController(string registrationID)
 		{
-			//if (_game.RegistrationHandler.RegistrationExists(registrationID))
-			//{
-			//	return _game.initializeController(Context.ConnectionId, _game.RegistrationHandler.RemoveRegistration(registrationID));
-			//}
+			if (_game.RegistrationHandler.RegistrationExists(registrationID))
+			{
+				return _game.initializeController(Context.ConnectionId, _game.RegistrationHandler.RemoveRegistration(registrationID));
+			}
 
 			return null;
 		}
@@ -108,6 +108,8 @@ namespace TranMini.GameServer
 					}
 
 					Square square = _game.UserHandler.GetUserSquare(Context.ConnectionId);
+
+					square.Jump();
 
 					//if (square.Controllable.Value)
 					//{

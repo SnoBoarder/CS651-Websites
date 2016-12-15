@@ -19,6 +19,7 @@
 
     export interface ISquareData extends ICollidableData {
         Name: string;
+        Jump: number;
         UserControlled?: boolean;
     }
 

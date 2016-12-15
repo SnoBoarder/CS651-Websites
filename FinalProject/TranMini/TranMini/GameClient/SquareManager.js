@@ -39,6 +39,9 @@ var TranMini;
             }
             //this.UserShipManager.LoadPayload(payload);
         };
+        SquareManager.prototype.Jump = function () {
+            this.UserSquareManager.Jump();
+        };
         return SquareManager;
     }());
     TranMini.SquareManager = SquareManager;
