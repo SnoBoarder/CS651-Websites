@@ -6,7 +6,7 @@ var TranMini;
     var Square = (function () {
         function Square(game, payload) {
             this._destroyed = false;
-            this.Graphic = new TranMini.SquareGraphic(game, payload.Name, payload.UserControlled); // TODO: Add position information if needed
+            this.Graphic = new TranMini.SquareGraphic(game, payload); // TODO: Add position information if needed
             //this.Graphic = new ShipGraphic(payload.Name, payload.UserControlled, this.LevelManager, this.LifeController, payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
             // Going to use the rectangle to "hold" all the other graphics
             //super(this.Graphic.GetDrawBounds());
@@ -23,9 +23,7 @@ var TranMini;
         //}
         Square.prototype.LoadPayload = function (payload) {
             this.ID = payload.ID;
-            if (payload.Jump > 0) {
-                this.Graphic.Jump(payload.Jump);
-            }
+            this.Graphic.LoadPayload(payload);
         };
         Square.prototype.Destroy = function () {
             if (!this._destroyed) {
@@ -36,3 +34,4 @@ var TranMini;
     }());
     TranMini.Square = Square;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=Square.js.map

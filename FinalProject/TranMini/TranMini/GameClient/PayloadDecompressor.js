@@ -15,7 +15,11 @@ var TranMini;
                 return {
                     Collided: !!obj[this.CollidableContract.Collided],
                     ID: obj[this.CollidableContract.ID],
-                    Disposed: !!obj[this.CollidableContract.Disposed]
+                    Disposed: !!obj[this.CollidableContract.Disposed],
+                    X: obj[this.CollidableContract.X],
+                    Y: obj[this.CollidableContract.Y],
+                    Width: obj[this.CollidableContract.Width],
+                    Height: obj[this.CollidableContract.Height]
                 };
             };
             PayloadDecompressor.prototype.DecompressSquare = function (square) {
@@ -60,3 +64,4 @@ var TranMini;
         Server.PayloadDecompressor = PayloadDecompressor;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=PayloadDecompressor.js.map

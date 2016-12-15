@@ -185,6 +185,7 @@
     <Compile Include="GameServer\RegisteredClient.cs" />
     <Compile Include="GameServer\RegistrationHandler.cs" />
     <Compile Include="GameServer\RuntimeConfiguration.cs" />
+    <Compile Include="GameServer\ScreenConfiguration.cs" />
     <Compile Include="GameServer\Square.cs" />
     <Compile Include="GameServer\SquareManager.cs" />
     <Compile Include="GameServer\User.cs" />

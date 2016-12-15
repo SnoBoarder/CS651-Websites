@@ -17,11 +17,15 @@ namespace TranMini.GameServer
 			result[CollidableCompressionContract.Collided] = Convert.ToInt32(obj.Collided);
 			result[CollidableCompressionContract.ID] = obj.ID;
 			result[CollidableCompressionContract.Disposed] = Convert.ToInt32(obj.Disposed);
+			result[CollidableCompressionContract.X] = obj.Position.X;
+			result[CollidableCompressionContract.Y] = obj.Position.Y;
+			result[CollidableCompressionContract.Width] = obj.Width;
+			result[CollidableCompressionContract.Height] = obj.Height;
 		}
 
 		public object[] Compress(Square square)
 		{
-			object[] result = new object[5];
+			object[] result = new object[9];
 
 			SetCollidableContractMembers(result, square);
 

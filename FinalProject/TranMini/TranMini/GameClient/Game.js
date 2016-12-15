@@ -11,8 +11,7 @@ var TranMini;
     var Game = (function () {
         function Game(serverAdapter, initializationData) {
             var _this = this;
-            var create = this.create.bind(this);
-            this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: this.preload, create: this.create });
+            this.game = new Phaser.Game(700, 400, Phaser.AUTO, 'game', { preload: this.preload, create: this.create });
             Game.GameConfiguration = new TranMini.ConfigurationManager(initializationData.Configuration);
             this._squareManager = new TranMini.SquareManager(this.game);
             this._squareManager.Initialize(new TranMini.UserSquareManager(initializationData.SquareID, this._squareManager, serverAdapter));
@@ -24,13 +23,11 @@ var TranMini;
             });
         }
         Game.prototype.preload = function () {
-            this.game.load.image('logo', '../Images/phaser-logo-small.png');
         };
         Game.prototype.create = function () {
-            var logo = this.game.add.sprite(this.game.world.centerX, 0, 'logo');
-            logo.anchor.setTo(.5, 0);
         };
         return Game;
     }());
     TranMini.Game = Game;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=Game.js.map

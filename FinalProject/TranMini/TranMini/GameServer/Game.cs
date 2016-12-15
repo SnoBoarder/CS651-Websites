@@ -32,6 +32,7 @@ namespace TranMini.GameServer
 		private long _drawFPS = 0;
 		private int DRAW_AFTER;
 
+		public ScreenConfiguration ScreenConfiguration { get; set; }
 		public RuntimeConfiguration RuntimeConfiguration { get; set; }
 		public GameConfigurationManager Configuration { get; set; }
 		public UserHandler UserHandler { get; private set; }
@@ -44,6 +45,7 @@ namespace TranMini.GameServer
 		{
 			_locker = new object();
 
+			ScreenConfiguration = new ScreenConfiguration();
 			Configuration = new GameConfigurationManager();
 			RegistrationHandler = new RegistrationHandler();
 			RuntimeConfiguration = new RuntimeConfiguration();

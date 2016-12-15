@@ -10,7 +10,7 @@ namespace TranMini.GameServer
 	public class Square : Collidable
 	{
 		public const string NAME_PREFIX = "Square";
-		public const int WIDTH = 10;
+		public const int WIDTH = 50;
 		public const int HEIGHT = WIDTH;
 		public const int JUMP_DURATION = 750;
 

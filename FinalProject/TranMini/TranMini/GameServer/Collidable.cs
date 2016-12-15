@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -8,6 +9,8 @@ namespace TranMini.GameServer
 {
 	public class Collidable
 	{
+		protected Rectangle _bounds;
+
 		// updated internally inside Interlocked
 		private static int _itemCount = 0;
 
@@ -22,10 +25,11 @@ namespace TranMini.GameServer
 		public Collidable(int w, int h)//, MovementController mc, LifeController lc, DamageController dc)
 		{
 			ID = -1;
-		//	_width = w;
-		//	_height = h;
-		//	CollidedAt = new Vector2();
-		//	_bounds = new Rectangle(Convert.ToInt32(mc.Position.X), Convert.ToInt32(mc.Position.Y), _width, _height);
+			Width = w;
+			Height = h;
+			Position = new Vector2();
+			//	CollidedAt = new Vector2();
+			_bounds = new Rectangle(Convert.ToInt32(Position.X), Convert.ToInt32(Position.Y), Width, Height);
 		//	MovementController = mc;
 		//	LifeController = lc;
 		//	DamageController = dc;
@@ -40,10 +44,10 @@ namespace TranMini.GameServer
 		public bool Disposed { get; set; }
 		public int ID { get; set; }
 		public bool Collided { get; set; }
-		//public Vector2 CollidedAt { get; set; }
+		public Vector2 Position { get; set; }
 		public DateTime LastUpdated { get; set; }
-		protected int _width { get; set; }
-		protected int _height { get; set; }
+		public int Width { get; private set; }
+		public int Height { get; private set; }
 
 		//public bool Altered()
 		//{
@@ -58,16 +62,6 @@ namespace TranMini.GameServer
 		public int ServerID()
 		{
 			return _serverID;
-		}
-
-		public int Width()
-		{
-			return _width;
-		}
-
-		public int Height()
-		{
-			return _height;
 		}
 
 		/// <summary>

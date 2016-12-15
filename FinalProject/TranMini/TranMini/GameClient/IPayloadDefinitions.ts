@@ -15,6 +15,10 @@
         //LifeController: ILifeControllerData;
         ID: number;
         Disposed: boolean;
+        X: number;
+        Y: number;
+        Width: number;
+        Height: number;
     }
 
     export interface ISquareData extends ICollidableData {

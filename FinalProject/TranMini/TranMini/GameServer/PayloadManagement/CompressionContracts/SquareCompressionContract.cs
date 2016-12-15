@@ -8,7 +8,7 @@ namespace TranMini.GameServer.CompressionContracts
 	public class SquareCompressionContract
 	{
 		// setting after last CollidableCompressionContract item
-		public short Jump = 3;
-		public short Name = 4;
+		public short Jump = 7;
+		public short Name = 8;
 	}
 }

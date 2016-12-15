@@ -111,3 +111,4 @@ var TranMini;
         Server.ServerAdapter = ServerAdapter;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=ServerAdapter.js.map

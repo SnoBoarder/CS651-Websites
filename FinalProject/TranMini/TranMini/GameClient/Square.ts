@@ -20,7 +20,7 @@ module TranMini {
         constructor(game: Phaser.Game, payload: Server.ISquareData) {
             this._destroyed = false;
 
-            this.Graphic = new SquareGraphic(game, payload.Name, payload.UserControlled); // TODO: Add position information if needed
+            this.Graphic = new SquareGraphic(game, payload); // TODO: Add position information if needed
 
             //this.Graphic = new ShipGraphic(payload.Name, payload.UserControlled, this.LevelManager, this.LifeController, payload.MovementController.Position, payload.MovementController.Rotation, Ship.SIZE, contentManager);
 
@@ -45,9 +45,7 @@ module TranMini {
         public LoadPayload(payload: Server.ISquareData): void {
             this.ID = payload.ID;
 
-            if (payload.Jump > 0) {
-                this.Graphic.Jump(payload.Jump);
-            }
+            this.Graphic.LoadPayload(payload);
         }
 
         public Destroy(): void {

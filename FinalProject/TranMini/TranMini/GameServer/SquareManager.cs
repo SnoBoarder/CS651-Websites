@@ -23,6 +23,26 @@ namespace TranMini.GameServer
 			Squares = new ConcurrentDictionary<string, Square>();
 		}
 
+		public void OrganizeSquares()
+		{
+			int totalSquares = Squares.Count;
+
+			// space out the squares equally
+			int padding = (Game.Instance.ScreenConfiguration.SCREEN_WIDTH - Square.WIDTH) / (totalSquares + 1);
+
+			int x = padding;
+			int y = Game.Instance.ScreenConfiguration.SCREEN_HEIGHT - Square.HEIGHT;
+			Parallel.ForEach(Squares, currentSquare =>
+			{
+				currentSquare.Value.Position.X = x;
+
+				if (currentSquare.Value.Position.Y == 0)
+					currentSquare.Value.Position.Y = y; // only set if y has not been set yet
+
+				x += padding;
+			});
+		}
+
 		public void Add(Square s)
 		{
 			// Only enable respawn if it hasn't been enabled yet
@@ -40,6 +60,8 @@ namespace TranMini.GameServer
 			Square s;
 			Squares.TryRemove(connectionIDKey, out s);
 		}
+
+		private bool _initialized = false;
 
 		public void Update(GameTime gameTime)
 		{

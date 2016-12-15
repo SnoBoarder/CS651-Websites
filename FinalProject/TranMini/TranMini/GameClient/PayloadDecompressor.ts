@@ -20,7 +20,11 @@ module TranMini.Server {
             return {
                 Collided: !!obj[this.CollidableContract.Collided],
                 ID: obj[this.CollidableContract.ID],
-                Disposed: !!obj[this.CollidableContract.Disposed]
+                Disposed: !!obj[this.CollidableContract.Disposed],
+                X: obj[this.CollidableContract.X],
+                Y: obj[this.CollidableContract.Y],
+                Width: obj[this.CollidableContract.Width],
+                Height: obj[this.CollidableContract.Height]
             };
         }
 

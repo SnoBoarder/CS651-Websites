@@ -18,9 +18,7 @@ module TranMini {
 
         constructor(serverAdapter: Server.ServerAdapter, initializationData: Server.IClientInitialization) {
 
-            var create = this.create.bind(this);
-
-            this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: this.preload, create: this.create });
+            this.game = new Phaser.Game(700, 400, Phaser.AUTO, 'game', { preload: this.preload, create: this.create });
 
             Game.GameConfiguration = new ConfigurationManager(initializationData.Configuration);
 
@@ -37,13 +35,9 @@ module TranMini {
         }
 
         private preload() {
-            this.game.load.image('logo', '../Images/phaser-logo-small.png');
         }
 
         private create() {
-
-            var logo = this.game.add.sprite(this.game.world.centerX, 0, 'logo');
-            logo.anchor.setTo(.5, 0);
         }
     }
 }

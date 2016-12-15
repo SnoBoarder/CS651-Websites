@@ -34,3 +34,5 @@ ConfigurationManager
 ServerConnectionManager
 IConfigurationDefinition
 Square
+
+organize squares

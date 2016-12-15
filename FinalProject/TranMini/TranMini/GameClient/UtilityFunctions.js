@@ -31,3 +31,4 @@ var TranMini;
             .animate({ backgroundColor: current }, duration / 2);
     };
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=UtilityFunctions.js.map

@@ -38,6 +38,8 @@ namespace TranMini.GameServer
 			{
 				_squareManager.Add(square);
 				_collisionManager.Monitor(square);
+
+				_squareManager.OrganizeSquares();
 			}
 		}
 	}
