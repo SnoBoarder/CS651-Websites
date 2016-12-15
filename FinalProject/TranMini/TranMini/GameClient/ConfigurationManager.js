@@ -24,4 +24,3 @@ var TranMini;
     }());
     TranMini.ConfigurationManager = ConfigurationManager;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=ConfigurationManager.js.map

@@ -43,4 +43,3 @@ var TranMini;
     }());
     TranMini.SquareManager = SquareManager;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=SquareManager.js.map

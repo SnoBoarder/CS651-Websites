@@ -105,6 +105,12 @@ module TranMini {
         }
 
         private HandleScoring(payload: Server.ISquareData): void {
+            if (this._currentScore > payload.CurrentScore) {
+                // we failed! trigger
+                var tween = this.game.add.tween(this._square).to({ x: payload.X - 10 }, 50, Phaser.Easing.Bounce.InOut, false, 0, 4, true);
+                tween.start();
+            }
+
             this._currentScore = payload.CurrentScore;
             this._highScore = payload.HighScore;
 

@@ -61,4 +61,3 @@ var TranMini;
         Server.PayloadDecompressor = PayloadDecompressor;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=PayloadDecompressor.js.map
