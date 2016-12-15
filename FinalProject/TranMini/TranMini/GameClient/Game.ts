@@ -7,7 +7,6 @@
 /// <reference path="SquareManager.ts" />
 /// <reference path="UserSquareManager.ts" />
 
-
 module TranMini {
     export class Game {
         public static GameConfiguration: ConfigurationManager;
