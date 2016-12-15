@@ -27,6 +27,8 @@ var TranMini;
                 result.Jump = square[this.SquareContract.Jump];
                 result.UserControlled = square[this.SquareContract.UserControlled];
                 result.Name = square[this.SquareContract.Name];
+                result.CurrentScore = square[this.SquareContract.CurrentScore];
+                result.HighScore = square[this.SquareContract.HighScore];
                 return result;
             };
             PayloadDecompressor.prototype.DecompressEnemy = function (enemy) {
@@ -58,4 +60,3 @@ var TranMini;
         Server.PayloadDecompressor = PayloadDecompressor;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=PayloadDecompressor.js.map

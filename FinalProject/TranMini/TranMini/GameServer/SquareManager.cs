@@ -34,10 +34,7 @@ namespace TranMini.GameServer
 			int y = Game.Instance.ScreenConfiguration.SCREEN_HEIGHT - Square.HEIGHT;
 			Parallel.ForEach(Squares, currentSquare =>
 			{
-				currentSquare.Value.Position.X = x;
-
-				if (currentSquare.Value.Position.Y == 0)
-					currentSquare.Value.Position.Y = y; // only set if y has not been set yet
+				currentSquare.Value.SetPosition(x, y);
 
 				x += padding;
 			});
@@ -59,6 +56,17 @@ namespace TranMini.GameServer
 		{
 			Square s;
 			Squares.TryRemove(connectionIDKey, out s);
+		}
+
+		public void RewardSquares()
+		{
+			Parallel.ForEach(Squares, currentSquare =>
+			{
+				if (currentSquare.Value.JustCollided)
+					currentSquare.Value.JustCollided = false;
+				else
+					currentSquare.Value.CurrentScore++;
+			});
 		}
 
 		public void Update(GameTime gameTime)

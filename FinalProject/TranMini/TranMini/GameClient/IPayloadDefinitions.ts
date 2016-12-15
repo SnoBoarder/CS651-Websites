@@ -25,6 +25,8 @@
         Name: string;
         Jump: number;
         UserControlled?: boolean;
+        CurrentScore: number;
+        HighScore: number;
     }
 
     export interface IEnemyData extends ICollidableData {

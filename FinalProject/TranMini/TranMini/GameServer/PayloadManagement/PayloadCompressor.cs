@@ -26,12 +26,14 @@ namespace TranMini.GameServer
 
 		public object[] Compress(Square square)
 		{
-			object[] result = new object[9];
+			object[] result = new object[11];
 
 			SetCollidableContractMembers(result, square);
 
 			result[SquareCompressionContract.Jump] = square.JumpDuration;
 			result[SquareCompressionContract.Name] = square.Name;
+			result[SquareCompressionContract.CurrentScore] = square.CurrentScore;
+			result[SquareCompressionContract.HighScore] = square.HighScore;
 
 			return result;
 		}

@@ -48,4 +48,3 @@ var TranMini;
     }());
     TranMini.LatencyResolver = LatencyResolver;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=LatencyResolver.js.map

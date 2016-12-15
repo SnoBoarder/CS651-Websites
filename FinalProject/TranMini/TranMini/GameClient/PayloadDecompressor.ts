@@ -34,6 +34,8 @@ module TranMini.Server {
             result.Jump = square[this.SquareContract.Jump];
             result.UserControlled = square[this.SquareContract.UserControlled];
             result.Name = square[this.SquareContract.Name];
+            result.CurrentScore = square[this.SquareContract.CurrentScore];
+            result.HighScore = square[this.SquareContract.HighScore];
 
             return result;
         }

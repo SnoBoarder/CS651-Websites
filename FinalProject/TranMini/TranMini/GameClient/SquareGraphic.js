@@ -6,30 +6,60 @@ var TranMini;
         function SquareGraphic(game, payload) {
             this.game = game;
             this._jumping = false;
+            this._currentScore = 0;
+            this._highScore = 0;
             this._width = payload.Width;
             this._height = payload.Height;
             this._y = payload.Y;
-            this.group = game.add.group();
-            var graphics = game.add.graphics(0, 0);
-            graphics.beginFill(payload.UserControlled ? 0xEEEEEE : 0xFFFFFF, 1);
+            this.CreateSquare(payload);
+            this.CreateScoring(payload);
+        }
+        SquareGraphic.prototype.CreateSquare = function (payload) {
+            this._square = this.game.add.group();
+            var graphics = this.game.add.graphics(0, 0);
+            graphics.beginFill(payload.UserControlled ? 0xA9FDE3 : 0xFCB2C7, 1);
             graphics.drawRect(0, 0, this._width, this._height);
             graphics.endFill();
-            var body = game.add.sprite(0, 0, graphics.generateTexture());
+            var body = this.game.add.sprite(0, 0, graphics.generateTexture());
             var style = { font: "bold 10px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle" };
-            var text = game.add.text(0, 0, payload.Name, style);
-            text.setTextBounds(0, 0, this._width, this._height);
-            this.group.add(body);
-            this.group.add(text);
+            var playerName = this.game.add.text(0, 0, payload.Name, style);
+            playerName.setTextBounds(0, 0, this._width, this._height);
+            this._square.add(body);
+            this._square.add(playerName);
             if (payload.UserControlled) {
-                var description = game.add.text(0, 0, "(YOU)", style);
+                var description = this.game.add.text(0, 0, "(YOU)", style);
                 description.setTextBounds(0, 0, this._width, this._height / 2);
-                this.group.add(description);
+                this._square.add(description);
             }
-            this.group.x = payload.X;
-            this.group.y = payload.Y;
+            this._square.x = payload.X;
+            this._square.y = payload.Y;
             graphics.destroy();
-        }
+        };
+        SquareGraphic.prototype.getRandomColor = function () {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+        SquareGraphic.prototype.CreateScoring = function (payload) {
+            var currentScoreStyle = { font: "bold 18px Arial", fill: "#ffff00", boundsAlignH: "center", boundsAlignV: "middle" };
+            var highScoreStyle = { font: "bold 14px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+            this._currentScore = payload.CurrentScore;
+            this._highScore = payload.HighScore;
+            this._highScoreText = this.game.add.text(0, 0, String(this._highScore), highScoreStyle);
+            this._highScoreText.setTextBounds(0, 30, this._width, 0);
+            this._currentScoreText = this.game.add.text(0, 0, String(this._currentScore), currentScoreStyle);
+            this._currentScoreText.setTextBounds(0, 0, this._width, 0);
+            this._scoring = this.game.add.group();
+            this._scoring.add(this._highScoreText);
+            this._scoring.add(this._currentScoreText);
+            this._scoring.x = payload.X;
+            this._scoring.y = 150;
+        };
         SquareGraphic.prototype.LoadPayload = function (payload) {
+            this.HandleScoring(payload);
             if (!this._jumping && payload.Jump > 0) {
                 this._jumping = true;
                 this.Jump(payload.Jump);
@@ -37,25 +67,30 @@ var TranMini;
             if (this._jumping && payload.Jump == 0) {
                 this._jumping = false;
             }
-            if (payload.X != this.group.x) {
+            if (payload.X != this._square.x) {
                 this.MoveSquare(payload.X);
             }
         };
+        SquareGraphic.prototype.HandleScoring = function (payload) {
+            this._currentScore = payload.CurrentScore;
+            this._highScore = payload.HighScore;
+            this._currentScoreText.text = String(this._currentScore);
+            this._highScoreText.text = String(this._highScore);
+        };
         SquareGraphic.prototype.MoveSquare = function (x) {
             // TODO: Consider animating
-            this.group.x = x;
+            this._square.x = x;
         };
         SquareGraphic.prototype.Jump = function (duration) {
-            var tweenA = this.game.add.tween(this.group).to({ y: this._y - 100 }, duration / 2, Phaser.Easing.Exponential.Out);
-            var tweenB = this.game.add.tween(this.group).to({ y: this._y }, duration / 2, Phaser.Easing.Bounce.Out);
+            var tweenA = this.game.add.tween(this._square).to({ y: this._y - 50 }, duration / 2, Phaser.Easing.Exponential.Out);
+            var tweenB = this.game.add.tween(this._square).to({ y: this._y }, duration / 2, Phaser.Easing.Bounce.Out);
             tweenA.chain(tweenB);
             tweenA.start();
         };
         SquareGraphic.prototype.Hide = function () {
-            this.group.visible = false;
+            this._square.visible = false;
         };
         return SquareGraphic;
     }());
     TranMini.SquareGraphic = SquareGraphic;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=SquareGraphic.js.map

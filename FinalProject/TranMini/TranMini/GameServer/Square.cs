@@ -12,7 +12,7 @@ namespace TranMini.GameServer
 		public const string NAME_PREFIX = "Square";
 		public const int WIDTH = 50;
 		public const int HEIGHT = WIDTH;
-		public const int JUMP_DURATION = 750;
+		public const int JUMP_DURATION = 500;
 
 		private static int _squareGUID = 0;
 
@@ -26,14 +26,34 @@ namespace TranMini.GameServer
 		public int JumpDuration { get; set; }
 		public DateTime? JumpedAt { get; private set; }
 
+		public int HighScore { get; private set; }
+		public int CurrentScore { get; set; }
+
+		public bool JustCollided { get; set; }
+
 		public Square() : base(WIDTH, HEIGHT)
 		{
 			ID = Interlocked.Increment(ref _squareGUID);
 			Name = NAME_PREFIX + ID;
+
 			// handle death handler
 			//OnDeath += new DeathEventHandler((sender, e) => StatRecorder.ShipDeath(sender, e));
+		}
 
-			//_enqueuedCommands = new ConcurrentQueue<Action>();
+		public override void HandleCollisionWith(Collidable c)
+		{
+			// you collided with the enemy!
+
+			if (JumpedAt.HasValue)
+				return; // if you're jumping you're fine
+
+			// you weren't jumping! fail
+			JustCollided = true;
+
+			if (CurrentScore > HighScore)
+				HighScore = CurrentScore;
+
+			CurrentScore = 0;
 		}
 
 		public void Jump()
@@ -54,16 +74,6 @@ namespace TranMini.GameServer
 				JumpedAt = null;
 				JumpDuration = 0;
 			}
-
-			//	Action command;
-
-			//	while (_enqueuedCommands.Count > 0)
-			//	{
-			//		if (_enqueuedCommands.TryDequeue(out command) && !this.Disposed)
-			//		{
-			//			command();
-			//		}
-			//	}
 		}
 	}
 }

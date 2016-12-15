@@ -9,7 +9,14 @@ namespace TranMini.GameServer
 {
 	public class Collidable
 	{
-		protected Rectangle _bounds;
+		private Rectangle _bounds;
+		public bool Disposed { get; set; }
+		public int ID { get; set; }
+		public bool Collided { get; set; }
+		public Vector2 Position { get; }
+		public DateTime LastUpdated { get; set; }
+		public int Width { get; private set; }
+		public int Height { get; private set; }
 
 		// updated internally inside Interlocked
 		private static int _itemCount = 0;
@@ -38,16 +45,22 @@ namespace TranMini.GameServer
 			_serverID = Interlocked.Increment(ref _itemCount);
 		}
 
+		public void SetPosition(int x, int y)
+		{
+			Position.X = x;
+			_bounds.X = x;
+
+			if (Position.Y == 0)
+			{
+				Position.Y = y; // only set if y has not been set yet
+				_bounds.Y = y;
+			}
+		}
+
 		//public MovementController MovementController { get; set; }
 		//public LifeController LifeController { get; set; }
 		//public DamageController DamageController { get; set; }
-		public bool Disposed { get; set; }
-		public int ID { get; set; }
-		public bool Collided { get; set; }
-		public Vector2 Position { get; set; }
-		public DateTime LastUpdated { get; set; }
-		public int Width { get; private set; }
-		public int Height { get; private set; }
+		
 
 		//public bool Altered()
 		//{
@@ -91,10 +104,14 @@ namespace TranMini.GameServer
 		///// Called when there is a collision with another object "<paramref name="c"/>."
 		///// </summary>
 		///// <param name="c">The object that I colided with</param>
-		//public virtual void HandleCollisionWith(Collidable c, Map space)
-		//{
-		//	HandleCollision();
-		//}
+		public virtual void HandleCollisionWith(Collidable c)
+		{
+		}
+
+		public virtual Rectangle GetBounds()
+		{
+			return _bounds;
+		}
 
 		//public virtual void HandleCollision()
 		//{
@@ -134,15 +151,10 @@ namespace TranMini.GameServer
 		///// </summary>
 		///// <param name="c">The object to check the collision against.</param>
 		///// <returns>Whether or not I am colliding with <paramref name="c"/>.</returns>
-		//public virtual bool IsCollidingWith(Collidable c)
-		//{
-		//	return _bounds.IntersectsWith(c.GetBounds());
-		//}
-
-		//public virtual Rectangle GetBounds()
-		//{
-		//	return _bounds;
-		//}
+		public virtual bool IsCollidingWith(Collidable c)
+		{
+			return _bounds.IntersectsWith(c.GetBounds());
+		}
 
 		//public Vector2 Center()
 		//{

@@ -56,11 +56,12 @@ namespace TranMini.GameServer
 		private void AddEnemyToGame()
 		{
 			Enemy enemy = new Enemy();
-			enemy.Position.X = 10;
-			enemy.Position.Y = Game.Instance.ScreenConfiguration.SCREEN_HEIGHT - Enemy.HEIGHT;
+			enemy.SetPosition(0, Game.Instance.ScreenConfiguration.SCREEN_HEIGHT - Enemy.HEIGHT);
+
+			enemy.OnBounce += _squareManager.RewardSquares;
 
 			enemyManager.Add(enemy);
-			_collisionManager.Monitor(enemy);
+			_collisionManager.Monitor(enemy, true);
 		}
 	}
 }

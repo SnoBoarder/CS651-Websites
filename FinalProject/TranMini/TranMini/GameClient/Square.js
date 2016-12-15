@@ -34,4 +34,3 @@ var TranMini;
     }());
     TranMini.Square = Square;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=Square.js.map

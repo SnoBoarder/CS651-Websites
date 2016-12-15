@@ -10,5 +10,7 @@ namespace TranMini.GameServer.CompressionContracts
 		// setting after last CollidableCompressionContract item
 		public short Jump = 7;
 		public short Name = 8;
+		public short CurrentScore = 9;
+		public short HighScore = 10; 
 	}
 }

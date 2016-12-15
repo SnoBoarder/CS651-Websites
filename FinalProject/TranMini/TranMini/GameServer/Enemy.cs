@@ -15,7 +15,13 @@ namespace TranMini.GameServer
 
 		private static int _enemyGUID = 0;
 
+		public delegate void BounceEventHandler();
+		public event BounceEventHandler OnBounce;
+
 		public string Name { get; set; }
+
+		private int speed = 5;
+
 
 		public Enemy() : base(WIDTH, HEIGHT)
 		{
@@ -23,7 +29,6 @@ namespace TranMini.GameServer
 			Name = NAME_PREFIX + ID;
 		}
 
-		private int speed = 5;
 
 		public void Update(GameTime gameTime)
 		{
@@ -31,9 +36,13 @@ namespace TranMini.GameServer
 
 			Position.X+= speed;
 
-			_bounds.X = (int)Position.X;
+			SetPosition(Convert.ToInt32(Position.X), Convert.ToInt32(Position.Y));
 			if (Position.X + Width > Game.Instance.ScreenConfiguration.SCREEN_WIDTH || Position.X < 0)
+			{
+				OnBounce?.Invoke();
+
 				speed *= -1;
+			}
 		}
 	}
 }
