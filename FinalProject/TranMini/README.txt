@@ -1,9 +1,35 @@
-Write all packages to install:
-- Install-Package jquery typescript
-- Install-Package jquery cookie typescript
-- Install-Package signalR typescript
-- Install-Package jquery.cookie
-- Install-Package Microsoft.Owin.Security.Cookies
+The following packages need to be installed through Package Manager Console:
+Id                                                 Versions     ProjectName
+--                                                 --------     -----------
+Antlr                                              {3.4.1.9004} TranMini   
+bootstrap                                          {3.0.0}      TranMini   
+jQuery                                             {1.10.2}     TranMini   
+jQuery.Cookie                                      {1.4.1}      TranMini   
+jquery.cookie.TypeScript.DefinitelyTyped           {0.2.1}      TranMini   
+jquery.TypeScript.DefinitelyTyped                  {3.1.2}      TranMini   
+jQuery.Validation                                  {1.11.1}     TranMini   
+Microsoft.AspNet.Mvc                               {5.2.3}      TranMini   
+Microsoft.AspNet.Razor                             {3.2.3}      TranMini   
+Microsoft.AspNet.SignalR                           {2.2.1}      TranMini   
+Microsoft.AspNet.SignalR.Core                      {2.2.1}      TranMini   
+Microsoft.AspNet.SignalR.JS                        {2.2.1}      TranMini   
+Microsoft.AspNet.SignalR.SystemWeb                 {2.2.1}      TranMini   
+Microsoft.AspNet.Web.Optimization                  {1.1.3}      TranMini   
+Microsoft.AspNet.WebPages                          {3.2.3}      TranMini   
+Microsoft.CodeDom.Providers.DotNetCompilerPlatform {1.0.0}      TranMini   
+Microsoft.jQuery.Unobtrusive.Validation            {3.2.3}      TranMini   
+Microsoft.Net.Compilers                            {1.0.0}      TranMini   
+Microsoft.Owin                                     {3.0.1}      TranMini   
+Microsoft.Owin.Host.SystemWeb                      {2.1.0}      TranMini   
+Microsoft.Owin.Security                            {3.0.1}      TranMini   
+Microsoft.Owin.Security.Cookies                    {3.0.1}      TranMini   
+Microsoft.Web.Infrastructure                       {1.0.0.0}    TranMini   
+Modernizr                                          {2.6.2}      TranMini   
+Newtonsoft.Json                                    {6.0.4}      TranMini   
+Owin                                               {1.0}        TranMini   
+Respond                                            {1.2.0}      TranMini   
+signalr.TypeScript.DefinitelyTyped                 {0.4.1}      TranMini   
+WebGrease                                          {1.5.2}      TranMini   
 
 http://tranmini.azurewebsites.net/Home/Game
 
@@ -27,6 +53,7 @@ Hiccups:
 - Negotiation
 - HighFrequencyTimer
 - GameTime
+https://github.com/NTaylorMullen/ShootR/tree/master/ShootR
 
 PayloadDecompressor
 ServerConnectionManager
