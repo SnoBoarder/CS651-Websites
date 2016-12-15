@@ -42,13 +42,6 @@ namespace TranMini.GameServer
 
 		public void Add(Square s)
 		{
-			// Only enable respawn if it hasn't been enabled yet
-			//if (!s.RespawnEnabled)
-			//{
-			//	s.RespawnEnabled = true;
-			//	s.OnDeath += new DeathEventHandler(_respawnManager.StartRespawnCountdown);
-			//}
-
 			Squares.TryAdd(s.Host.ConnectionID, s);
 		}
 
@@ -56,6 +49,8 @@ namespace TranMini.GameServer
 		{
 			Square s;
 			Squares.TryRemove(connectionIDKey, out s);
+
+			OrganizeSquares();
 		}
 
 		public void RewardSquares()

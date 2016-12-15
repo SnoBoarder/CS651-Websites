@@ -14,11 +14,12 @@ namespace TranMini.GameServer
 		public const int HEIGHT = WIDTH;
 		public const int JUMP_DURATION = 500;
 
+		public const int IDLE_FAIL_COUNT = 10;
+
 		private static int _squareGUID = 0;
 
-		//public event DeathEventHandler OnDeath;
-
-		//private ConcurrentQueue<Action> _enqueuedCommands; // maybe?
+		public delegate void FailEventHandler();
+		public event FailEventHandler OnSuperFail;
 
 		public string Name { get; set; }
 		public User Host { get; set; }
@@ -30,6 +31,8 @@ namespace TranMini.GameServer
 		public int CurrentScore { get; set; }
 
 		public bool JustCollided { get; set; }
+
+		private int _failCount;
 
 		public Square() : base(WIDTH, HEIGHT)
 		{
@@ -43,9 +46,14 @@ namespace TranMini.GameServer
 		public override void HandleCollisionWith(Collidable c)
 		{
 			// you collided with the enemy!
+			if (JustCollided)
+				return; // oh you just collided
 
 			if (JumpedAt.HasValue)
+			{
+				_failCount = 0; // you've stopped failing!
 				return; // if you're jumping you're fine
+			}
 
 			// you weren't jumping! fail
 			JustCollided = true;
@@ -54,6 +62,9 @@ namespace TranMini.GameServer
 				HighScore = CurrentScore;
 
 			CurrentScore = 0;
+
+			if (++_failCount > IDLE_FAIL_COUNT)
+				OnSuperFail?.Invoke();
 		}
 
 		public void Jump()

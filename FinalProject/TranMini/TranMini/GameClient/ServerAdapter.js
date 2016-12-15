@@ -16,23 +16,6 @@ var TranMini;
                 this.OnForcedDisconnect = new eg.EventHandler();
                 this.OnControlTransferred = new eg.EventHandler();
                 this.OnPingRequest = new eg.EventHandler();
-                // Get the user name and store it to prepend to messages.
-                //$('#displayname').val(prompt('Enter your name:', ''));
-                // Create a function that the hub can call back to display messages.
-                Proxy.on("addNewMessageToPage", function (name, message) {
-                    // Add the message to the page.
-                    $('#discussion').append('<li><strong>' + name
-                        + '</strong>: ' + message + '</li>');
-                });
-                //Connection.start().done(()=> {
-                //    $('#sendmessage').click(()=> {
-                //        // Call the Send method on the hub.
-                //        Proxy.invoke("send", $('#displayname').val(), $('#message').val());
-                //        // Clear text box and reset focus for next comment.
-                //        $('#message').val('').focus();
-                //    });
-                //});
-                //////////////////////// real stuff //////////////////////
                 this._connectionManager = new Server.ServerConnectionManager(authCookieName);
                 //(<any>this.Proxy.invoke) = () => {
                 //    if ((<any>this.Connection).state === $.signalR.connectionState.connected) {
@@ -44,7 +27,7 @@ var TranMini;
                     _this.Stop();
                 });
                 this.OnControlTransferred.Bind(function () {
-                    // You have been disconnected!  The control for your ship has been transferred to your other login.
+                    // You have been disconnected!  The control for your square has been transferred to your other login.
                     _this.Stop();
                 });
             }
@@ -111,3 +94,4 @@ var TranMini;
         Server.ServerAdapter = ServerAdapter;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=ServerAdapter.js.map

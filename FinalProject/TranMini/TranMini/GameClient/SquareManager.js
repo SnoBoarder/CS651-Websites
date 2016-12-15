@@ -9,9 +9,6 @@ var TranMini;
             this._game = _game;
             this._squares = {};
         }
-        //constructor(private _viewport: eg.Bounds.BoundingRectangle, private _scene: eg.Rendering.Scene2d, private _collisionManager: eg.Collision.CollisionManager, private _contentManager: eg.Content.ContentManager) {
-        //    this._ships = {};
-        //}
         SquareManager.prototype.Initialize = function (userShipManager) {
             this.UserSquareManager = userShipManager;
         };
@@ -35,9 +32,9 @@ var TranMini;
                 }
                 if (square.Disposed) {
                     this._squares[square.ID].Destroy();
+                    delete this._squares[square.ID];
                 }
             }
-            //this.UserShipManager.LoadPayload(payload);
         };
         SquareManager.prototype.Jump = function () {
             this.UserSquareManager.Jump();
@@ -46,3 +43,4 @@ var TranMini;
     }());
     TranMini.SquareManager = SquareManager;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=SquareManager.js.map

@@ -5,8 +5,11 @@ module TranMini {
 
     export class SquareGraphic {
         private _square: Phaser.Group;
-        private _scoring: Phaser.Group;
+        private _body: Phaser.Sprite;
+        private _playerName: Phaser.Text;
+        private _description: Phaser.Text;
 
+        private _scoring: Phaser.Group;
         private _currentScoreText: Phaser.Text;
         private _highScoreText: Phaser.Text;
 
@@ -42,35 +45,26 @@ module TranMini {
             graphics.drawRect(0, 0, this._width, this._height);
             graphics.endFill();
 
-            var body = this.game.add.sprite(0, 0, graphics.generateTexture());
+            this._body = this.game.add.sprite(0, 0, graphics.generateTexture());
 
             var style = { font: "bold 10px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle" };
 
-            var playerName = this.game.add.text(0, 0, payload.Name, style);
-            playerName.setTextBounds(0, 0, this._width, this._height);
+            this._playerName = this.game.add.text(0, 0, payload.Name, style);
+            this._playerName.setTextBounds(0, 0, this._width, this._height);
 
-            this._square.add(body);
-            this._square.add(playerName);
+            this._square.add(this._body);
+            this._square.add(this._playerName);
 
-            if(payload.UserControlled) {
-                var description = this.game.add.text(0, 0, "(YOU)", style);
-                description.setTextBounds(0, 0, this._width, this._height / 2);
-                this._square.add(description);
+            if (payload.UserControlled) {
+                this._description = this.game.add.text(0, 0, "(YOU)", style);
+                this._description.setTextBounds(0, 0, this._width, this._height / 2);
+                this._square.add(this._description);
             }
 
             this._square.x = payload.X;
             this._square.y = payload.Y;
 
             graphics.destroy();
-        }
-
-        private getRandomColor():string {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
         }
 
         private CreateScoring(payload: Server.ISquareData): void {
@@ -121,6 +115,7 @@ module TranMini {
         private MoveSquare(x: number) {
             // TODO: Consider animating
             this._square.x = x;
+            this._scoring.x = x;
         }
 
         private Jump(duration: number) {
@@ -134,6 +129,19 @@ module TranMini {
 
         public Hide(): void {
             this._square.visible = false;
+        }
+
+        public Dispose(): void {
+            this._square.removeAll();
+            this._body.kill();
+            this._playerName.kill();
+            if (this._description != null) {
+                this._description.kill();
+            }
+
+            this._scoring.removeAll();
+            this._currentScoreText.kill();
+            this._highScoreText.kill();
         }
     }
 

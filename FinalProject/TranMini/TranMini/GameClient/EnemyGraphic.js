@@ -33,3 +33,4 @@ var TranMini;
     }());
     TranMini.EnemyGraphic = EnemyGraphic;
 })(TranMini || (TranMini = {}));
+//# sourceMappingURL=EnemyGraphic.js.map

@@ -32,7 +32,7 @@ namespace TranMini.GameServer
 			if (!u.Controller && u.MySquare != null)
 			{
 				u.MySquare.Dispose();
-				u.MySquare.Host = null; // Remove linking from the ship
+				u.MySquare.Host = null; // Remove linking from the square
 			}
 		}
 
@@ -62,6 +62,7 @@ namespace TranMini.GameServer
 		public void AddUser(User user)
 		{
 			_userList.TryAdd(user.ConnectionID, user);
+			user.OnIdle += DisconnectUser;
 			//user.IdleManager.OnIdle += _gameHandler.RemoveShipFromGame;
 			//user.IdleManager.OnIdleTimeout += DisconnectUser;
 			//user.IdleManager.OnComeBack += _gameHandler.AddShipToGame;
