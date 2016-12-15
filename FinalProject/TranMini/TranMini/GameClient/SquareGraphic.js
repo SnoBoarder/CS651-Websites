@@ -5,6 +5,7 @@ var TranMini;
     var SquareGraphic = (function () {
         function SquareGraphic(game, payload) {
             this.game = game;
+            this._jumping = false;
             this._width = payload.Width;
             this._height = payload.Height;
             this._y = payload.Y;
@@ -29,8 +30,12 @@ var TranMini;
             graphics.destroy();
         }
         SquareGraphic.prototype.LoadPayload = function (payload) {
-            if (payload.Jump > 0) {
+            if (!this._jumping && payload.Jump > 0) {
+                this._jumping = true;
                 this.Jump(payload.Jump);
+            }
+            if (this._jumping && payload.Jump == 0) {
+                this._jumping = false;
             }
             if (payload.X != this.group.x) {
                 this.MoveSquare(payload.X);

@@ -13,13 +13,8 @@ namespace TranMini.GameServer
 
 		public PayloadCompressor Compressor = new PayloadCompressor();
 
-		private PayloadCache _payloadCache = new PayloadCache();
-
-
 		public ConcurrentDictionary<string, object[]> GetGamePayloads(ICollection<User> userList, int playerCount, World world)
 		{
-			_payloadCache.StartNextPayloadCache();
-
 			ConcurrentDictionary<string, object[]> payloads = new ConcurrentDictionary<string, object[]>();
 
 			Parallel.ForEach(userList, user =>
@@ -28,8 +23,6 @@ namespace TranMini.GameServer
 				{
 					//Vector2 screenOffset = new Vector2((user.Viewport.Width / 2) + Ship.WIDTH / 2, (user.Viewport.Height / 2) + Ship.HEIGHT / 2);
 					string connectionID = user.ConnectionID;
-
-					_payloadCache.CreateCacheFor(connectionID);
 
 					var payload = new Payload();//GetInitializedPayload(playerCount, bulletCount, user);
 

@@ -52,6 +52,7 @@ namespace TranMini.GameServer
 			if (JumpedAt.HasValue && (GameTime.Now - JumpedAt) >= TimeSpan.FromMilliseconds(JUMP_DURATION))
 			{
 				JumpedAt = null;
+				JumpDuration = 0;
 			}
 
 			//	Action command;

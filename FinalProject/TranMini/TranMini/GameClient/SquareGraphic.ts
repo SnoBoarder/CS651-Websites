@@ -11,6 +11,8 @@ module TranMini {
 
         private _y: number;
 
+        private _jumping: boolean = false;
+
         constructor(private game: Phaser.Game, payload: Server.ISquareData) {
             this._width = payload.Width;
             this._height = payload.Height;
@@ -48,8 +50,13 @@ module TranMini {
         }
 
         public LoadPayload(payload: Server.ISquareData): void {
-            if (payload.Jump > 0) {
+            if (!this._jumping && payload.Jump > 0) {
+                this._jumping = true;
                 this.Jump(payload.Jump);
+            }
+
+            if (this._jumping && payload.Jump == 0) {
+                this._jumping = false;
             }
 
             if (payload.X != this.group.x) {
