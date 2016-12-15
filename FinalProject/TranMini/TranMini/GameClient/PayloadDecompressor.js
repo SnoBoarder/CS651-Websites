@@ -34,6 +34,7 @@ var TranMini;
             PayloadDecompressor.prototype.DecompressEnemy = function (enemy) {
                 var result = this.DecompressCollidable(enemy);
                 result.Name = enemy[this.EnemyContract.Name];
+                result.Speed = enemy[this.EnemyContract.Speed];
                 return result;
             };
             PayloadDecompressor.prototype.DecompressPayload = function (data) {
@@ -60,4 +61,3 @@ var TranMini;
         Server.PayloadDecompressor = PayloadDecompressor;
     })(Server = TranMini.Server || (TranMini.Server = {}));
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=PayloadDecompressor.js.map

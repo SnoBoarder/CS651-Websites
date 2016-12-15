@@ -40,11 +40,12 @@ namespace TranMini.GameServer
 
 		public object[] Compress(Enemy enemy)
 		{
-			object[] result = new object[8];
+			object[] result = new object[9];
 
 			SetCollidableContractMembers(result, enemy);
 
 			result[EnemyCompressionContract.Name] = enemy.Name;
+			result[EnemyCompressionContract.Speed] = enemy.Speed;
 
 			return result;
 		}

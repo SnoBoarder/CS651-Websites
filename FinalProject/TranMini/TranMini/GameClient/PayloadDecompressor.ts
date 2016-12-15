@@ -44,6 +44,7 @@ module TranMini.Server {
             var result: IEnemyData = <IEnemyData>this.DecompressCollidable(enemy);
 
             result.Name = enemy[this.EnemyContract.Name];
+            result.Speed = enemy[this.EnemyContract.Speed];
 
             return result;
         }

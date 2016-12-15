@@ -9,7 +9,7 @@ var TranMini;
             this._height = payload.Height;
             this._y = payload.Y;
             var graphics = game.add.graphics(0, 0);
-            graphics.beginFill(0xFF00FF, 1);
+            graphics.beginFill(0xFF266C, 1);
             graphics.drawRect(0, 0, this._width, this._height);
             graphics.endFill();
             this._body = game.add.sprite(0, 0, graphics.generateTexture());
@@ -33,4 +33,3 @@ var TranMini;
     }());
     TranMini.EnemyGraphic = EnemyGraphic;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=EnemyGraphic.js.map

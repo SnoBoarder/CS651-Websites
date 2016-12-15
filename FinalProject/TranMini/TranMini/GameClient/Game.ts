@@ -38,10 +38,16 @@ module TranMini {
             });
         }
 
-        private preload() {
+        preload() {
         }
 
-        private create() {
+        create() {
+            this.game.stage.backgroundColor = "#67B2D2";
+
+            var style = { font: "bold 64px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+            var title = this.game.add.text(0, 0, "Tran Mini Game", style);
+            title.setTextBounds(0, 0, 700, 100);
         }
     }
 }

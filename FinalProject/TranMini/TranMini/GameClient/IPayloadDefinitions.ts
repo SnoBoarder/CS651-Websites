@@ -31,6 +31,7 @@
 
     export interface IEnemyData extends ICollidableData {
         Name: string;
+        Speed: number;
     }
 
     export interface IPayloadData {

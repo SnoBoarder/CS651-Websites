@@ -17,11 +17,11 @@ var TranMini;
         SquareGraphic.prototype.CreateSquare = function (payload) {
             this._square = this.game.add.group();
             var graphics = this.game.add.graphics(0, 0);
-            graphics.beginFill(payload.UserControlled ? 0xA9FDE3 : 0xFCB2C7, 1);
+            graphics.beginFill(payload.UserControlled ? 0xCEAB34 : 0xD039D8, 1);
             graphics.drawRect(0, 0, this._width, this._height);
             graphics.endFill();
             this._body = this.game.add.sprite(0, 0, graphics.generateTexture());
-            var style = { font: "bold 10px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle" };
+            var style = { font: "bold 10px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
             this._playerName = this.game.add.text(0, 0, payload.Name, style);
             this._playerName.setTextBounds(0, 0, this._width, this._height);
             this._square.add(this._body);
@@ -98,4 +98,3 @@ var TranMini;
     }());
     TranMini.SquareGraphic = SquareGraphic;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=SquareGraphic.js.map

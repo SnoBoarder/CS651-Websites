@@ -27,9 +27,12 @@ var TranMini;
         Game.prototype.preload = function () {
         };
         Game.prototype.create = function () {
+            this.game.stage.backgroundColor = "#67B2D2";
+            var style = { font: "bold 64px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+            var title = this.game.add.text(0, 0, "Tran Mini Game", style);
+            title.setTextBounds(0, 0, 700, 100);
         };
         return Game;
     }());
     TranMini.Game = Game;
 })(TranMini || (TranMini = {}));
-//# sourceMappingURL=Game.js.map
